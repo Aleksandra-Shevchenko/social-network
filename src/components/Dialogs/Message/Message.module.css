@@ -1,0 +1,20 @@
+.message_box{
+    display: flex;
+    box-sizing: border-box;
+    padding: 20px;
+    align-items: center;
+
+}
+
+.text{
+  padding: 20px;
+  margin: 0;
+
+}
+
+.avatar{
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 100%;
+}

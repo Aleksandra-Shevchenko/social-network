@@ -1,0 +1,16 @@
+
+.profile_info{
+
+}
+
+.description_box{
+  padding: 20px;
+
+}
+
+
+.picture {
+    width: 100%;
+    object-fit: cover;
+    height: 300px;
+  }

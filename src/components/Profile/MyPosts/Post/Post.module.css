@@ -1,0 +1,16 @@
+.post{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.avatar{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.text {
+  margin-left: 20px;
+}
