@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "Kanit-Light";
+  font-weight: 300;
+  font-display: swap;
+  src: url("./Kanit/Kanit-Light.woff2") format("woff2");
+}
+
+
+@font-face {
+  font-family: "Kanit-Regular";
+  font-weight: 400;
+  font-display: swap;
+  src: url("./Kanit/Kanit-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Kanit-Semibold";
+  font-weight: 600;
+  font-display: swap;
+  src: url("./Kanit/Kanit-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Kanit-Bold";
+  font-style:  bold;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./Kanit/Kanit-Bold.woff2") format("woff2");
+}
+
+
+
+
+@font-face {
+  font-family: "Montserrat-Light";
+  font-weight: 300;
+  font-display: swap;
+  src: url("./Montserrat/Montserrat-Light.woff2") format("woff2");
+}
+
+
+@font-face {
+  font-family: "Montserrat-Regular";
+  font-weight: 400;
+  font-display: swap;
+  src: url("./Montserrat/Montserrat-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Montserrat-Semibold";
+  font-weight: 600;
+  font-display: swap;
+  src: url("./Montserrat/Montserrat-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Montserrat-Bold";
+  font-style:  bold;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./Montserrat/Montserrat-Bold.woff2") format("woff2");
+}
+

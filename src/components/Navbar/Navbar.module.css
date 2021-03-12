@@ -1,8 +1,9 @@
 .menu{
   grid-area: menu;
-  background-color:yellow;
-  padding: 20px;
-  
+  background-color:#fdfeff;
+  padding: 20px 0;
+  color: #465e72;
+
 }
 
 .menu_nav{
@@ -15,11 +16,40 @@
   padding: 0;
 }
 
+.item{
+  margin: 0 0 10px 20px;
+  font-size: 14px;
+}
+
+.item:first-child{
+  font-family: "Montserrat-Regular";
+  border: 2px #465e72 solid;
+  border-radius: 20px;
+  margin: 0 0 10px 0;
+  line-height: 28px;
+  text-align: center;
+}
+
 .link{
-  color: black;
+  color: #465e72;
+  font-family: "Montserrat-Regular";
+  text-transform: uppercase;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.item:first-child .link{
+  justify-content: center;
+
 }
 
 .active{
-  color: gray;
+  font-family: "Montserrat-Semibold";
+  /* color: gray; */
+}
+
+.picture {
+  width: 22px;
+  margin-right: 10px;
 }

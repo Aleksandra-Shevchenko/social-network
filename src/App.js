@@ -1,26 +1,31 @@
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
+import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
+import FriendsContainer from './components/Friends/FriendsContainer';
+import Login from './components/Login/Login';
 
 
-function App({ state }) {
+function App() {
   return (
     <div className="App" >
-      <BrowserRouter>
-        <Header />
+        <HeaderContainer />
         <Navbar />
-        <div class='app-content'>
-          <Route path='/profile'>
-            <Profile  posts={state.profilePage} />
+        <div className='app-content'>
+          <Route path='/profile/:userId?'>
+            <ProfileContainer />
           </Route>
           <Route path='/dialogs'>
-            <Dialogs dialogs={state.dialogsPage} />
+            <DialogsContainer />
+          </Route>
+          <Route path='/friends'>
+            <FriendsContainer />
           </Route>
           <Route path='/news'>
             <News />
@@ -28,8 +33,13 @@ function App({ state }) {
           <Route path='/settings'>
             <Settings />
           </Route>
+          <Route path='/users'>
+            <UsersContainer />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
         </div>
-      </BrowserRouter>
     </div>
   );
 }

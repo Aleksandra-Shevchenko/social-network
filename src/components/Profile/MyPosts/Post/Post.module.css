@@ -5,10 +5,11 @@
 }
 
 .avatar{
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
   border-radius: 100%;
+  border: 1px #465e72 solid;
 }
 
 .text {

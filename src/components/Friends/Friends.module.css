@@ -1,0 +1,16 @@
+.avatar{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.page{
+  font-size: 14px;
+}
+
+.page_active{
+  font-size: 14px;
+  font-weight: bold;
+}
+

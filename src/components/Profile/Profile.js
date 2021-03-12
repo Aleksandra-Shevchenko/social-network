@@ -1,13 +1,13 @@
 import style from './Profile.module.css';
 
-import MyPosts from './MyPosts/MyPosts';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
-function Profile({posts}) {
+function  Profile(props) {
   return (
     <div className={style.content}>
-      <ProfileInfo />
-      <MyPosts posts={posts}/>
+      <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} idAuthUser={props.id} />
+      <MyPostsContainer />
     </div>
   )
 }

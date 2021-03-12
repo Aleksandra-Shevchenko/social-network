@@ -1,18 +1,23 @@
 .App {
+  font-family: 'Montserrat-Regular', 'Kanit-Light';
   display: grid;
-  grid-template-rows: 80px 1fr;
-  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 70px 1fr;
+  grid-template-columns: 2fr 8fr;
   gap: 10px;
   grid-template-areas: 
   'header header'
   'menu content';
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 1200px;
+  min-height: 100vh;
+  padding: 10px 30px;
 }
 
 
 .app-content{
   grid-area: content;
-  background-color:grey;
+  background-color:#fdfeff;
+  padding: 20px 0;
+  display: flex;
 }
 

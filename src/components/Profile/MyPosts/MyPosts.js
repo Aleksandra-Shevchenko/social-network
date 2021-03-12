@@ -3,31 +3,34 @@ import React from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
 
-
-
-function MyPosts({posts}) {
-
+// {profilePage, addPost, onPostChange}
+function MyPosts(props) {
   const newPostRef = React.useRef();
 
-  const addNewPost = () => {
-    alert(newPostRef);
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.addPost();
   }
 
+  function handleChangeInput() {
+    const text = newPostRef.current.value;
+    props.onPostChange(text);
+  }
 
+  // debugger;
   return (
-    <div class={style.myPosts_box}>
+    <div className={style.myPosts_box}>
       <div>
-        <h2 class={style.title}>My posts</h2>
-        <from class={style.form}>
-          <textarea type='text' ref={newPostRef}></textarea>
-          <button type='submit' onClick={addNewPost}>Save</button>
-        </from>
+        <h2 className={style.title}>My posts</h2>
+        <form className={style.form} onSubmit={handleSubmit} >
+          <textarea ref={newPostRef} value={props.newPostText} onChange={handleChangeInput}></textarea>
+          <button type='submit'>Save</button>
+        </form>
       </div>
       <div className='PostList'>
-        {posts.posts.map(p => <Post message={p.text}/>)}
+        {props.posts.map(p => <Post message={p.text} key={p.id}/>)}
       </div>
     </div>
-
   )
 }
 
