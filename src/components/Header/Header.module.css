@@ -33,6 +33,8 @@
   object-fit: cover;
   border-radius: 100%;
   border: 1px #465e72 solid;
+  margin: 0 10px 0 0;
+
 }
 
 .user_box{
@@ -54,4 +56,16 @@
 
 .hidden_box{
   display: none;
+}
+
+.logout{
+  display: block;
+  background-image: url('../../images/logout.svg');
+  background-size: 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border: none;
 }

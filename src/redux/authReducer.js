@@ -17,7 +17,6 @@ const authReducer = (state = inintialState, action) =>{
         return {
           ...state,
           ...action.data,
-          isAuth: !state.isAuth,
         };
       default:
         return state;
@@ -33,7 +32,35 @@ export const getAuthUser = () => {
     authApi.authUser()
     .then(res => {
       if(!res.data.resultCode){
-        dispatch(setAuthUserData(res.data.data));
+        dispatch(setAuthUserData({...res.data.data, isAuth: true}));
+      }
+    })
+  }
+}
+
+export const login = (values) => {
+  return (dispatch) => {
+    authApi.login(values)
+    .then(res => {
+      if(!res.data.resultCode){
+        console.log('dispatch')
+        dispatch(getAuthUser())
+      }
+    })
+  }
+}
+
+export const logout = () => {
+  return (dispatch) => {
+    authApi.logout()
+    .then(res => {
+      if(!res.data.resultCode){
+        dispatch(setAuthUserData({
+          id: null,
+          email: null,
+          login: null,
+          isAuth: false
+        }));
       }
     })
   }

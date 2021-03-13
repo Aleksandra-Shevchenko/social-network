@@ -11,11 +11,14 @@ function Header(props) {
         <img className={style.logo} src={logoLink} alt=''/>
         <p className={style.logo_text}>TravelBook</p>
       </div>
+
+      {!props.isAuth && <NavLink to={'/login'}>Login</NavLink> }
+
       <div className={props.isAuth ? style.user_box : style.hidden_box}>
         <p className={style.name}>{props.login}</p>
         <img className={style.avatar} src={avatarDefault} alt=""/>
+        <button className={style.logout} onClick={props.logout} type='button'></button>
       </div>
-      {!props.isAuth && <NavLink to={'/login'}>Login</NavLink> }
     </header>
   )
 }

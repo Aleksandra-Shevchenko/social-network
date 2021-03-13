@@ -48,8 +48,16 @@ export const usersApi = {
 //авторизация пользователя
 export const authApi = {
   authUser() {
-    return api.get(`auth/me`)
+    return api.get(`auth/me`);
   },
+
+  login(values){
+    return api.post(`auth/login`, values);
+  },
+  
+  logout(){
+    return api.delete(`auth/login`);
+  }
 }
 
 
