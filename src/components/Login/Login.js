@@ -8,8 +8,6 @@ import { Redirect } from "react-router";
 
 function Login(props) {
 
-  console.log(props);
-
   const submit = (values, { setSubmitting }) => {
     console.log(values);
     props.login(values);

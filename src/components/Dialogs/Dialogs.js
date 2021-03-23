@@ -3,21 +3,13 @@ import React from 'react';
 import style from "./Dialogs.module.css";
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
+import AddMessageForm from '../common/AddMessageForm/AddMessageForm';
 
 
-
-function Dialogs({ dialogsPage, onMessageChange, onSendMessage }) {
+function Dialogs({ dialogsPage, onSendMessage }) {
  
-  function handleSubmit(e) {
-    e.preventDefault();
-    onSendMessage();
-    // dispatch(sendMessageActionCreator());
-  }
-
-  function handleChangeInput(e) {
-    let text = e.target.value;
-    onMessageChange(text);
-    // dispatch(updateNewMessageTextActionCreator(text));
+  function handleSubmit(values) {
+    onSendMessage(values.message);
   }
 
   return (
@@ -28,10 +20,7 @@ function Dialogs({ dialogsPage, onMessageChange, onSendMessage }) {
 
       <div className={style.messages}>
         {dialogsPage.messages.map(m => <Message text={m.text} key={m.id}/>)}
-        <form className={style.form} onSubmit={handleSubmit}>
-          <textarea type='text' value={dialogsPage.newMessageText} placeholder='Enter your message' onChange={handleChangeInput}></textarea>
-          <button type='submit'>Send</button>
-        </form>
+        <AddMessageForm onSubmit={handleSubmit} style={style.form}/>
       </div>
     </div>
   )

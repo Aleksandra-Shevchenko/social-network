@@ -2,30 +2,20 @@ import React from 'react';
 
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
+import AddMessageForm  from "../../common/AddMessageForm/AddMessageForm";
 
-// {profilePage, addPost, onPostChange}
+// {profilePage, addPost}
 function MyPosts(props) {
-  const newPostRef = React.useRef();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    props.addPost();
+  function handleSubmit(value) {
+    props.addPost(value.message);
   }
 
-  function handleChangeInput() {
-    const text = newPostRef.current.value;
-    props.onPostChange(text);
-  }
-
-  // debugger;
   return (
     <div className={style.myPosts_box}>
       <div>
         <h2 className={style.title}>My posts</h2>
-        <form className={style.form} onSubmit={handleSubmit} >
-          <textarea ref={newPostRef} value={props.newPostText} onChange={handleChangeInput}></textarea>
-          <button type='submit'>Save</button>
-        </form>
+        <AddMessageForm onSubmit={handleSubmit} style={style.form}/>
       </div>
       <div className='PostList'>
         {props.posts.map(p => <Post message={p.text} key={p.id}/>)}
