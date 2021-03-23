@@ -59,6 +59,18 @@
   margin-top: -14px;
 }
 
+.server_errorContainer {
+  margin-top: 6px;
+}
+
+.server_error {
+  font-family: "Montserrat-Semibold";
+  color: #e63946;
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+}
+
 .btn {
   font-family: "Montserrat-Semibold";
   color: white;

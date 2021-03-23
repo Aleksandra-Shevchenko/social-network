@@ -3,8 +3,9 @@ import { follow, unfollow, setCurrentFriendsPage, toggleFollowingProgress, getUs
 import React from 'react';
 import Friends from "./Friends";
 import Preloader from '../common/Preloader/Preloader';
-
-
+import { compose } from 'redux';
+import { withRouter } from "react-router";
+import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 
 
 class FriendsContainer extends React.Component {
@@ -29,8 +30,6 @@ class FriendsContainer extends React.Component {
 }
 
 
-
-
 const mapStateToProps = (state) => {
   return {
     totalFriendsCount: state.usersPage.totalFriendsCount,
@@ -47,12 +46,14 @@ const mapStateToProps = (state) => {
 //теперь передаем вместо функции mapDispatchToProps передаем объект,
 //ф-ия connect сама возьмет этот объект и сгененирурет коллбэки которые мы реньше прописывали в mapDispatchToProps
 
-export default  connect(mapStateToProps, {
-  setCurrentFriendsPage,
-  getUserFriends,
-
-
-  follow,
-  unfollow,
-  toggleFollowingProgress,
-})(FriendsContainer);
+export default compose(
+  connect(mapStateToProps, {
+    setCurrentFriendsPage,
+    getUserFriends,
+    follow,
+    unfollow,
+    toggleFollowingProgress,
+  }),
+  withRouter,
+  WithAuthRedirect
+)(FriendsContainer);

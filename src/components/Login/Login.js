@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import loginFormSchema from "./LoginFormSchema";
+import loginFormSchema from "../../utils/validation/LoginFormSchema";
 import {login} from '../../redux/authReducer';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router";
@@ -9,13 +9,12 @@ import style from './Login.module.css';
 function Login(props) {
 
   const submit = (values) => {
-    console.log(values);
     props.login(values);
-  }
+  };
 
   if(props.isAuth){
     return <Redirect to='profile'/>
-  }
+  };
 
   return (
     <div>
@@ -34,7 +33,7 @@ function Login(props) {
             <h1 className={style.title}>Sign in to continue</h1>
             <Form className={style.form}>
               <div className={style.form_row}>
-                <label for="email" className={style.label}>Email</label>
+                <label htmlFor="email" className={style.label}>Email</label>
                 <Field type="email" name="email" id="email"
                   className={`${style.input} ${errors.email && touched.email ? style.input_error : null}`}
                 />
@@ -42,7 +41,7 @@ function Login(props) {
               </div>
               
               <div className={style.form_row}>
-                <label for="password" className={style.label}>Password</label>
+                <label htmlFor="password" className={style.label}>Password</label>
                 <Field type="password" name="password" id="password"
                   className={`${style.input} ${errors.password && touched.password ? style.input_error : null}`}
                 />
@@ -50,7 +49,7 @@ function Login(props) {
               </div>
               
               <div className={style.form_checkbox}>
-                <label for="rememberMe" className={style.label}>Remember me</label>
+                <label htmlFor="rememberMe" className={style.label}>Remember me</label>
                 <Field type="checkbox" name="rememberMe" id="rememberMe" className={style.checkbox}/>
               </div>
 
@@ -60,6 +59,12 @@ function Login(props) {
               >
                 Sign in
               </button>
+              {props.error ? (
+                <div className={style.server_errorContainer}>
+                  <p className={style.server_error}>{`Something wrong!`}</p>
+                  <p className={style.server_error}>{props.error}</p>
+                </div>
+              ) : null}
             </Form>
           </div>
         )}
@@ -72,6 +77,7 @@ function Login(props) {
 const mapStateToProps = (state) => {
   return {
     isAuth: state.auth.isAuth,
+    error: state.auth.error,
   }
 }
 
