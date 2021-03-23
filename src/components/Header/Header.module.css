@@ -34,7 +34,14 @@
   border-radius: 100%;
   border: 1px #465e72 solid;
   margin: 0 10px 0 0;
+}
 
+.avatarNotAuth{
+  padding: 1px 6px 3px 9px;
+  box-sizing: border-box;
+  object-fit: contain;
+  border: 2px #465e72 solid;
+  margin: 0;
 }
 
 .user_box{
@@ -47,6 +54,21 @@
   font-size: 12px;
   text-transform: uppercase;
   border: 1px #465e72 solid;
+  color: #465e72;
+  border-radius: 20px;
+  margin: 0 10px 0;
+  text-align: center;
+  padding: 6px 10px;
+}
+
+.login{
+  text-decoration: none;
+  width: 100px;
+  font-family: "Montserrat-Bold";
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: uppercase;
+  border: 2px #465e72 solid;
   color: #465e72;
   border-radius: 20px;
   margin: 0 10px 0;

@@ -12,12 +12,12 @@ class FriendsContainer extends React.Component {
 
   componentDidMount() {
     this.props.getUserFriends(this.props.currentFriendsPage, this.props.pageFriendsSize);
-  }
+  };
     
   onPageChanged = (pageNum) => {
     this.props.setCurrentFriendsPage(pageNum);
     this.props.getUserFriends(pageNum, this.props.pageFriendsSize);
-  }
+  };
 
   render() {
     return (
@@ -25,8 +25,7 @@ class FriendsContainer extends React.Component {
         {this.props.isFetching ? <Preloader /> : <Friends {...this.props} onPageChanged={this.onPageChanged}/>}
       </>
     );
-  }
-  
+  };
 }
 
 

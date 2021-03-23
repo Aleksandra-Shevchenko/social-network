@@ -1,5 +1,9 @@
 import './App.css';
-import { Route } from 'react-router-dom';
+import React from 'react';
+import { Redirect, Route, withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { initializeApp } from './redux/appReducer'
+
 
 import Navbar from "./components/Navbar/Navbar";
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -11,17 +15,28 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import FriendsContainer from './components/Friends/FriendsContainer';
 import Login from './components/Login/Login';
 import Landing from './components/Landing/Landing';
+import Preloader from './components/common/Preloader/Preloader';
 
 
 
 
-function App() {
+class App extends React.Component {
 
-  return (
-    <div className="App" >
-        <HeaderContainer />
+  componentDidMount() {
+    this.props.initializeApp();
+  }
+  
+  render() {
+    if(!this.props.initialized){
+      return <Preloader />
+    }
 
-        {true &&  (
+
+    return (
+      <div className="App" >
+        <HeaderContainer {...this.props} />
+  
+        {this.props.isAuth &&  (
           <>
             <Navbar />
             <div className='app-content'>
@@ -46,10 +61,8 @@ function App() {
             </div>
           </>
         )}
-        
 
-        {true && (
-          <div className='app-landing'>
+        <div className='app-landing'>
           <Route path='/login'>
             <Login />
           </Route>
@@ -57,11 +70,24 @@ function App() {
             <Landing />
           </Route>
         </div>
-        )}
-        
-       
-    </div>
-  );
+
+        <Route>
+          {this.props.isAuth ? (
+            <Redirect to='/profile'/>
+          ) : (
+            <Redirect to='/'/>
+          )}
+        </Route>
+
+      </div>
+  )};
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+  login: state.auth.login,
+  authUserId: state.auth.id,
+  initialized: state.app.initialized,
+});
+
+export default connect(mapStateToProps, {initializeApp})(withRouter(App));

@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import loginFormSchema from "../../utils/validation/LoginFormSchema";
 import {login} from '../../redux/authReducer';
 import { connect } from 'react-redux';
-import { Redirect } from "react-router";
+import { Redirect, withRouter } from "react-router";
 import style from './Login.module.css';
 
 
@@ -81,4 +81,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {login})(Login);
+export default connect(mapStateToProps, {login})(withRouter(Login));
