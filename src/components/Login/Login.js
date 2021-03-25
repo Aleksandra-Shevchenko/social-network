@@ -17,7 +17,7 @@ function Login(props) {
   };
 
   return (
-    <div>
+    <div className={style.login_box}>
       <Formik
         initialValues={{ 
           email: "",

@@ -24,6 +24,7 @@
   color: #465e72;
   font-size: 20px;
   margin: 0 0 0 10px;
+  text-decoration: none;
 }
 
 
@@ -51,7 +52,7 @@
 
 .name{
   font-family: "Montserrat-Semibold";
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   border: 1px #465e72 solid;
   color: #465e72;

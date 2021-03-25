@@ -1,4 +1,5 @@
 import { getAuthUser } from "./authReducer";
+import { getUsers } from "./userReducer";
 
 const SET_INITIALIZED = 'SET_INITIALIZED';
 
@@ -24,6 +25,7 @@ const appReducer = (state = inintialState, action) =>{
 
 export const initializeApp = () => {
   return (dispatch) => {
+    dispatch(getUsers());
     dispatch(getAuthUser())
       .then(() => {
         dispatch(setInitialized());

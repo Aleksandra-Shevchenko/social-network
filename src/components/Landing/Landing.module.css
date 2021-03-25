@@ -72,3 +72,48 @@
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
+
+.data{
+  display: flex;
+  justify-content: space-between;
+  padding: 60px 90px;
+}
+
+.data_item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #465e72;
+  position: relative;
+  z-index: 0;
+}
+
+.data_nums{
+  font-family: "Kanit-Regular";
+  font-size: 68px;
+  opacity: .9;
+  margin: 0;
+}
+
+.liner{
+  display: block;
+  background-color: #fdfeff;
+  border-bottom: 2px solid #465e72;
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  margin: 0;
+  top: 58px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.data_text{
+  color: #354848;
+  opacity: .9;
+  font-family: "Montserrat-Semibold";
+  font-size: 18px;
+  margin: 0;
+  text-align: center;
+}

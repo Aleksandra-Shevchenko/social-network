@@ -67,7 +67,7 @@ class App extends React.Component {
             <Login />
           </Route>
           <Route exact path='/'>
-            <Landing />
+            <Landing totalUsersCount={this.props.totalUsersCount}/>
           </Route>
         </div>
 
@@ -88,6 +88,7 @@ const mapStateToProps = (state) => ({
   login: state.auth.login,
   authUserId: state.auth.id,
   initialized: state.app.initialized,
+  totalUsersCount: state.usersPage.totalUsersCount,
 });
 
 export default connect(mapStateToProps, {initializeApp})(withRouter(App));

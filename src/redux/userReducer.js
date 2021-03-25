@@ -25,7 +25,6 @@ let inintialState = {
   currentFriendsPage: 1,
   pageFriendsSize: 10,
   totalFriendsCount: 0,
-
 }
 
 const userReducer = (state = inintialState, action) =>{
@@ -92,11 +91,11 @@ export const setTotalFriendsCount = (num) => ({type: SET_TOTAL_FRIENDS_COUNT, nu
 
 
 //ThunkCreator
-export const getUsers = (currentPage, pageSize) => {
+export const getUsers = (page, pageSize) => {
   return (dispatch) => {
     dispatch(toggleIsFetching(true));
 
-    usersApi.getUsers(currentPage, pageSize)
+    usersApi.getUsers(page, pageSize)
     .then(data => {
       dispatch(toggleIsFetching(false));
       dispatch(setUsers(data.items));
@@ -105,11 +104,11 @@ export const getUsers = (currentPage, pageSize) => {
   }
 } 
 
-export const getUserFriends = (currentPage, pageSize) => {
+export const getUserFriends = (page, pageSize) => {
   return (dispatch) => {
     dispatch(toggleIsFetching(true));
 
-    usersApi.getFriends(currentPage, pageSize)
+    usersApi.getFriends(page, pageSize)
     .then(data => {
       dispatch(toggleIsFetching(false));
       dispatch(setFriends(data.items));
