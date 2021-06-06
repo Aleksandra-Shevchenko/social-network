@@ -13,36 +13,36 @@ function ProfileStatus(props) {
       return;
     }
     setEditMode(true);
-  }
+  };
 
   function deactivateEditMode() {
     setEditMode(false);
     props.updateStatus(status);
-  }
+  };
 
   function handleChangeStatus(e) {
     setStatus(e.currentTarget.value);
-  }
+  };
 
   React.useEffect(() => {
     setStatus(props.status);
-    console.log('обновилась')
-  }, [props.status])
+  }, [props.status]);
 
   
   return (
-  <div className={style.profile_status}>
-  {editMode ? (
-    <div>
-      <input autoFocus={true} onBlur={deactivateEditMode} value={status} onChange={handleChangeStatus} />
+    <div className={style.profile_status}>
+      {editMode ? (
+        <div>
+          <input autoFocus={true} onBlur={deactivateEditMode} value={status} onChange={handleChangeStatus} />
+        </div>
+        ) : (
+          <div>
+            <p onClick={activateEditMode}>{props.status || 'No status'}</p>
+          </div>
+        )
+      }
     </div>
-    ) : (
-      <div>
-        <p onClick={activateEditMode}>{props.status || 'No status'}</p>
-      </div>
-    )}
-  </div>
-  )
-}
+  );
+};
   
-  export default ProfileStatus;
+export default ProfileStatus;

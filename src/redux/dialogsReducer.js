@@ -1,6 +1,6 @@
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
-let inintialState = {
+const inintialState = {
   messages:   [
     {id: '1', text: 'Hi'},
     {id: '2', text: 'How are you?'},
@@ -27,7 +27,6 @@ const dialogsReducer = (state = inintialState, action) =>{
       return state;
   }
 }
-
 
 export const sendMessageActionCreator = (text) => ({type: SEND_MESSAGE, newText: text});
 

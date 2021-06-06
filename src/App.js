@@ -3,8 +3,6 @@ import React from 'react';
 import { Redirect, Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { initializeApp } from './redux/appReducer'
-
-
 import Navbar from "./components/Navbar/Navbar";
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import News from './components/News/News';
@@ -16,7 +14,6 @@ import FriendsContainer from './components/Friends/FriendsContainer';
 import Login from './components/Login/Login';
 import Landing from './components/Landing/Landing';
 import Preloader from './components/common/Preloader/Preloader';
-
 
 
 
@@ -63,12 +60,15 @@ class App extends React.Component {
         )}
 
         <div className='app-landing'>
-          <Route path='/login'>
-            <Login />
+
+          <Route exact path='/login'>
+            {this.props.isAuth ? <Redirect to='/profile' /> : <Login />}
           </Route>
+
           <Route exact path='/'>
             <Landing totalUsersCount={this.props.totalUsersCount}/>
           </Route>
+
         </div>
 
         <Route>

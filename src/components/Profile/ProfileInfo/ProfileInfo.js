@@ -5,43 +5,41 @@ import avatarDefault from '../../../images/avatarDefault.svg';
 import ProfileStatus from './ProfileStatus';
 
 
+function ProfileInfo({ profile, status, updateStatus, idAuthUser}) {
 
-
-function ProfileInfo(props) {
-
-  if(!props.profile){
+  if(!profile){
     return <Preloader />
   }
 
   return (
     <div className={style.profile_info}>
       <div>
-        <img className={`${style.user_photo} ${!props.profile.photos.large && style.user_photoDefault}`} src={props.profile.photos.large || avatarDefault } alt='#'/>
+        <img className={`${style.user_photo} ${!profile.photos.large && style.user_photoDefault}`} src={profile.photos.large || avatarDefault } alt='#'/>
       </div>
       <div className={style.description_box}>
         <div className={style.main_info}>
-          <h2 className={style.header} >{props.profile.fullName}</h2>
-          <ProfileStatus status={props.status} updateStatus={props.updateStatus}
-            noChanges={props.profile.userId !== props.idAuthUser && true} />
+          <h2 className={style.header} >{profile.fullName}</h2>
+          <ProfileStatus status={status} updateStatus={updateStatus}
+            noChanges={profile.userId !== idAuthUser && true} />
         </div>
         <div className={style.info}>
           <p className={style.text}>
             <span className={style.headline}>About me: </span> 
-            {props.profile.aboutMe || 'no description'}
+            {profile.aboutMe || 'no description'}
           </p>
           <p className={style.text}>
-            <span className={style.headline}>{props.profile.lookingForAJob ? 'Looking for a job: ' : 'Employed: '}</span> 
-            {props.profile.lookingForAJobDescription || 'no description'}
+            <span className={style.headline}>{profile.lookingForAJob ? 'Looking for a job: ' : 'Employed: '}</span> 
+            {profile.lookingForAJobDescription || 'no description'}
           </p>
         </div>
         <div className={style.photos}>
-          <img className={`${style.photo} ${!props.profile.photos.large && style.photo_default}`} src={props.profile.photos.large || camera} alt="#"/>
-          <img className={`${style.photo} ${!props.profile.photos.small && style.photo_default}`} src={props.profile.photos.small || camera} alt=""/>
+          <img className={`${style.photo} ${!profile.photos.large && style.photo_default}`} src={profile.photos.large || camera} alt="#"/>
+          <img className={`${style.photo} ${!profile.photos.small && style.photo_default}`} src={profile.photos.small || camera} alt=""/>
         </div>
         
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ProfileInfo;

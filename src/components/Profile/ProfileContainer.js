@@ -7,7 +7,6 @@ import { WithAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { compose } from 'redux';
 
 
-
 class ProfileContainer extends React.Component {
 
   componentDidMount() {
@@ -22,8 +21,8 @@ class ProfileContainer extends React.Component {
     return (
       <Profile {...this.props} />
     )
-  } 
-}
+  }
+};
 
 
 const mapStateToProps = (state) => ({ 

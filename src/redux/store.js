@@ -1,9 +1,8 @@
 import dialogsReducer from "./dialogsReducer";
 import profileReducer from "./profileReducer";
 
-
-
-let store ={
+// учебный store для понимания работы redux
+const store ={
   _state: {
     profilePage : {
       posts : [
@@ -48,12 +47,9 @@ let store ={
     this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
     this._callSubscriber(this._state);
   },
-
-}
-
+};
 
 // паттерн observer - наблюдатель, это ф-ия. Мы ее экспортируем туда, где хотим ей отдать другую ф-нию. Мы хотим этого наблюдателя вызывать когда-то что- то произошло
-
 
 export default store;
 window.store = store;

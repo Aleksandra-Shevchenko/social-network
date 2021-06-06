@@ -7,32 +7,27 @@ import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 import { compose } from "redux";
 
 
-
-
 class UsersContainer extends React.Component {
 
   componentDidMount() {
     if(this.props.users.length === 0){
       this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
-  }
+  };
     
   onPageChanged = (pageNum) => {
     this.props.setCurrentPage(pageNum);
     this.props.getUsers(pageNum, this.props.pageSize);
-  }
+  };
 
   render() {
     return (
       <>
-        {this.props.isFetching ? <Preloader /> : <Users {...this.props} onPageChanged={this.onPageChanged}/>}
+        {this.props.isFetching ? <Preloader /> : <Users {...this.props} onPageChanged={this.onPageChanged} />}
       </>
     );
   }
-  
-}
-
-
+};
 
 
 const mapStateToProps = (state) => {

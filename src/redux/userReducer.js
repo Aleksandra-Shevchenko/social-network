@@ -1,4 +1,5 @@
 import { usersApi } from "../api/api";
+import { updateObjectInArr } from "../utils/utils";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -12,9 +13,7 @@ const SET_TOTAL_FRIENDS_COUNT = 'SET_TOTAL_FRIENDS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
-
-
-let inintialState = {
+const inintialState = {
   users : [],
   pageSize: 100,
   totalUsersCount: 1,
@@ -25,19 +24,19 @@ let inintialState = {
   currentFriendsPage: 1,
   pageFriendsSize: 10,
   totalFriendsCount: 0,
-}
+};
 
 const userReducer = (state = inintialState, action) =>{
   switch (action.type) {
     case FOLLOW: 
       return {
         ...state,
-        users: state.users.map(user => (user.id === action.userId) ? {...user, followed: true} :  user)
+        users: updateObjectInArr(state.users, action.userId, 'id', {followed: true}),
       };
     case UNFOLLOW: 
       return {
         ...state,
-        users: state.users.map(user => (user.id === action.userId) ? {...user, followed: false} :  user)
+        users: updateObjectInArr(state.users, action.userId, 'id', {followed: false}),
       };
     case SET_USERS:
       return {...state, users: [...action.users]};
@@ -67,10 +66,10 @@ const userReducer = (state = inintialState, action) =>{
         : state.followingInProgress.filter(id => id !== action.userId)
       };
 
-      default:
-        return state;
+    default:
+      return state;
   }
-}
+};
 
 export const followSuccess = (userId) => ({type: FOLLOW, userId});
 export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId});
@@ -86,56 +85,58 @@ export const toggleFollowingProgress = (progress, userId) => ({type: TOGGLE_IS_F
 const setFriends = (friends) => ({type: SET_FRIENDS, friends});
 export const setTotalFriendsCount = (num) => ({type: SET_TOTAL_FRIENDS_COUNT, num});
 
+// общие вспомогательные ф-ии
+const getUsersOrFriends = async (dispatch, page, pageSize, apiMethod, actionCreatorSetItems, actionCreatorTotalCount) => {
+  dispatch(toggleIsFetching(true));
+  const data = await apiMethod(page, pageSize);
+  dispatch(toggleIsFetching(false));
+  dispatch(actionCreatorSetItems(data.items));
+  dispatch(actionCreatorTotalCount(data.totalCount));
+};
 
-
-
-
-//ThunkCreator
-export const getUsers = (page, pageSize) => {
-  return (dispatch) => {
-    dispatch(toggleIsFetching(true));
-
-    usersApi.getUsers(page, pageSize)
-    .then(data => {
-      dispatch(toggleIsFetching(false));
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(data.totalCount));
-    })
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+  dispatch(toggleFollowingProgress(true, userId));
+  const res = await apiMethod(userId);
+  if (!res.data.resultCode) {
+    dispatch(actionCreator(userId));
   }
-} 
+  dispatch(toggleFollowingProgress(false, userId));
+};
+
+// ThunkCreators
+export const getUsers = (page, pageSize) => {
+  return async (dispatch) => {
+    const apiMethod = usersApi.getUsers.bind(usersApi);
+    getUsersOrFriends(dispatch, page, pageSize, apiMethod, setUsers, setTotalUsersCount);
+  }
+};
 
 export const getUserFriends = (page, pageSize) => {
-  return (dispatch) => {
-    dispatch(toggleIsFetching(true));
-
-    usersApi.getFriends(page, pageSize)
-    .then(data => {
-      dispatch(toggleIsFetching(false));
-      dispatch(setFriends(data.items));
-      dispatch(setTotalFriendsCount(data.totalCount));
-    })
+  return async (dispatch) => {
+    const apiMethod = usersApi.getFriends.bind(usersApi);
+    getUsersOrFriends(dispatch, page, pageSize, apiMethod, setFriends, setTotalFriendsCount);
   }
-} 
+};
 
 export const follow = (userId) => {
-  return (dispatch) => {
-    dispatch(toggleFollowingProgress(true, userId));
-    usersApi.followFriend(userId).then(() => {
-      dispatch(followSuccess(userId));
-      dispatch(toggleFollowingProgress(false, userId));
-    })
+  return async (dispatch) => {
+    const apiMethod = usersApi.followFriend.bind(usersApi);
+    followUnfollowFlow(dispatch, userId, apiMethod, followSuccess);
   }
-} 
+};
 
 export const unfollow = (userId) => {
-  return (dispatch) => {
-    dispatch(toggleFollowingProgress(true, userId));
-    usersApi.unfollowFriend(userId).then(() => {
-      dispatch(unfollowSuccess(userId));
-      dispatch(toggleFollowingProgress(false, userId));
-    })
-  }
-} 
+  return async (dispatch) => {
+    const apiMethod = usersApi.unfollowFriend.bind(usersApi);
+    followUnfollowFlow(dispatch, userId, apiMethod, unfollowSuccess);
+    // getUserFriends(inintialState.currentFriendsPage, inintialState.pageFriendsSize);
 
+      // const arr = inintialState.friends.filter((item) => {
+      //   return item.id !== userId;
+      // })
+      // dispatch(setFriends(arr));
+      // dispatch(setTotalFriendsCount(arr.length));
+  }
+};
 
 export default userReducer;

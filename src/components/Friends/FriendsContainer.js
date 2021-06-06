@@ -8,24 +8,64 @@ import { withRouter } from "react-router";
 import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 
 
-class FriendsContainer extends React.Component {
+// class FriendsContainer extends React.Component {
 
-  componentDidMount() {
-    this.props.getUserFriends(this.props.currentFriendsPage, this.props.pageFriendsSize);
-  };
+//   componentDidMount() {
+//     this.props.getUserFriends(this.props.currentFriendsPage, this.props.pageFriendsSize);
+//   };
+
+//   // componentDidUpdate() {
+//   //   this.props.getUserFriends(this.props.currentFriendsPage, this.props.pageFriendsSize);
+//   // };
     
-  onPageChanged = (pageNum) => {
-    this.props.setCurrentFriendsPage(pageNum);
-    this.props.getUserFriends(pageNum, this.props.pageFriendsSize);
+//   onPageChanged = (pageNum) => {
+//     this.props.setCurrentFriendsPage(pageNum);
+//     this.props.getUserFriends(pageNum, this.props.pageFriendsSize);
+//   };
+
+//   render() {
+//     return (
+//       <>
+//         {this.props.isFetching ? <Preloader /> : <Friends {...this.props} onPageChanged={this.onPageChanged}/>}
+//       </>
+//     );
+//   };
+// }
+
+function FriendsContainer({currentFriendsPage, pageFriendsSize, getUserFriends, setCurrentFriendsPage, ...props}) {
+
+  const [isUnfollow, setIsUnfollow] = React.useState(false);
+
+  const onPageChanged = (pageNum) => {
+    setCurrentFriendsPage(pageNum);
+    getUserFriends(pageNum, pageFriendsSize);
   };
 
-  render() {
-    return (
-      <>
-        {this.props.isFetching ? <Preloader /> : <Friends {...this.props} onPageChanged={this.onPageChanged}/>}
-      </>
-    );
-  };
+  const handleClick = () => {
+    setIsUnfollow(true);
+  }
+
+  React.useEffect(() => {
+      getUserFriends(currentFriendsPage, pageFriendsSize);
+  }, []);
+  
+  React.useEffect(() => {
+    if(isUnfollow) {
+      getUserFriends(currentFriendsPage, pageFriendsSize);
+      setIsUnfollow(false);
+    }
+  }, [isUnfollow]);
+
+  return (
+    <>
+      {props.isFetching ? <Preloader /> : <Friends {...props}
+        onPageChanged={onPageChanged}
+        onUnfollowClick={handleClick}
+        currentFriendsPage={currentFriendsPage}
+        pageFriendsSize={pageFriendsSize}
+      />}
+    </>
+  )
 }
 
 
@@ -39,7 +79,7 @@ const mapStateToProps = (state) => {
     isFetching: state.usersPage.isFetching,
     followingInProgress: state.usersPage.followingInProgress,
   }
-}
+};
 
 
 //теперь передаем вместо функции mapDispatchToProps передаем объект,

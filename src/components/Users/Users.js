@@ -1,56 +1,41 @@
 import style from './Users.module.css';
-import avatarDefault from "../../images/avatarDefault.svg";
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import Pagination from '../Pagination/Pagination';
+import UserCard from '../UserCard/UserCard';
 
 
-
-
-function Users(props) {
-
-  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  const pages = [];
-
-  for(let i = 1; i <= pagesCount; i++){
-    pages.push(i);
-  }
+function Users({
+  totalUsersCount,
+  pageSize,
+  currentPage,
+  onPageChanged,
+  users,
+  followingInProgress,
+  unfollow,
+  follow
+}) {
 
   return (
     <div>
-      <div>
-        {pages.map((p) => {
-          return <button key={p}
-              className={`${style.page} ${p === props.currentPage && style.page_active}`}
-              onClick={() => {props.onPageChanged(p)}}>{p}
-            </button>
-          }
-        )}
-      </div>
-      {props.users.map((u) => {
+      <Pagination
+        totalCount={totalUsersCount}
+        pageSize={pageSize}
+        currentPage={currentPage}
+        onClick={onPageChanged}
+      />
+      {users.map((user) => {
         return (
-          <div key={u.id}>
-            <div>
-              <NavLink to={'/profile/' + u.id}>
-                <img src={!u.photos.small ? avatarDefault : u.photos.small} alt='' className={style.avatar}/>
-              </NavLink>
-
-              {u.followed 
-                ? <button disabled={props.followingInProgress.some(id  => id === u.id)} onClick={() => props.unfollow(u.id)}>Unfollow</button>
-                : <button disabled={props.followingInProgress.some(id  => id === u.id)} onClick={() => props.follow(u.id)}>Follow</button>}
-            </div>
-            <div>
-              <p>{u.name}</p>
-              <p>{u.status}</p>
-              <p>{'u.location.city'}</p>
-              <p>{'u.location.country'}</p>
-            </div>
-          </div>
-        )
-      })
+          <UserCard
+            key={user.id} 
+            user={user}
+            followingInProgress={followingInProgress}
+            follow={follow}
+            unfollow={unfollow}
+          />)
+        })
       }
     </div>
-
   );
-}
+};
 
-export default  Users;
+export default Users;
