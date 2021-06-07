@@ -13,7 +13,6 @@ function Friends({
   followingInProgress,
   unfollow,
   follow,
-  onUnfollowClick,
 }) {
 
 
@@ -33,7 +32,6 @@ function Friends({
             followingInProgress={followingInProgress}
             follow={follow}
             unfollow={unfollow}
-            onUnfollowClick={onUnfollowClick}
           />
         )
       })}

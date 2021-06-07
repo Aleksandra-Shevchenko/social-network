@@ -4,7 +4,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 
-function UserCard({ user, followingInProgress, follow, unfollow, onUnfollowClick }) {
+function UserCard({ user, followingInProgress, follow, unfollow }) {
 
   return (
     <>
@@ -16,11 +16,7 @@ function UserCard({ user, followingInProgress, follow, unfollow, onUnfollowClick
         {user.followed 
           ? <button
               disabled={followingInProgress.some(id  => id === user.id)}
-              onClick={() => {
-                unfollow(user.id);
-                onUnfollowClick && onUnfollowClick();
-              }
-              }
+              onClick={() => unfollow(user.id)}
             >
               Unfollow
             </button>
