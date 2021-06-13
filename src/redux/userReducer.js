@@ -10,13 +10,12 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_CURRENT_FRIENDS_PAGE = 'SET_CURRENT_FRIENDS_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'; 
 const SET_TOTAL_FRIENDS_COUNT = 'SET_TOTAL_FRIENDS_COUNT'; 
-
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 const inintialState = {
   users : [],
-  pageSize: 100,
+  pageSize: 20,
   totalUsersCount: 1,
   currentPage: 1,
   isFetching: false,
@@ -139,6 +138,5 @@ export const unfollow = (userId) => {
     dispatch(setFriendsAfterDelete(userId));
   }
 };
-
 
 export default userReducer;

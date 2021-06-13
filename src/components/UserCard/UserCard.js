@@ -30,8 +30,6 @@ function UserCard({ user, followingInProgress, follow, unfollow }) {
       <div>
         <p>{user.name}</p>
         <p>{user.status}</p>
-        <p>{'user.location.city'}</p>
-        <p>{'user.location.country'}</p>
       </div>
     </>
   );

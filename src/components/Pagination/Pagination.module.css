@@ -1,9 +1,45 @@
 .page{
+  font-family: "Kanit-Regular";
   font-size: 14px;
+  background-color: transparent;
+  border: none;
+  color: #465e72;
+  width: 24px;
+  height: 34px;
+  padding: 0;
 }
 
 .page_active{
-  font-size: 14px;
+  font-size: 24px;
   font-weight: bold;
 }
 
+.paginator{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.arrow{
+  background-color: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  box-sizing: border-box;
+  background-position: center;
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+}
+
+.left{
+  background-image: url('../../images/left.svg');
+  margin-right: 6px;
+}
+
+.right{
+  background-image: url('../../images/right.svg');
+  margin-left: 6px;
+}

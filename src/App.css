@@ -18,7 +18,7 @@
   grid-area: content;
   background-color:#fdfeff;
   padding: 20px 0;
-  display: flex;
+  min-width: 100%;
 }
 
 .app-landing{

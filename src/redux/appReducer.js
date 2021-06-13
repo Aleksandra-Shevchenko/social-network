@@ -9,7 +9,6 @@ let inintialState = {
 
 const setInitialized = () => ({type: SET_INITIALIZED});
 
-
 const appReducer = (state = inintialState, action) =>{
   switch (action.type) {
     case SET_INITIALIZED:
@@ -19,9 +18,8 @@ const appReducer = (state = inintialState, action) =>{
       };
     default:
       return state;
-}
-}
-
+  }
+};
 
 export const initializeApp = () => {
   return (dispatch) => {
@@ -31,7 +29,6 @@ export const initializeApp = () => {
         dispatch(setInitialized());
       })
   }
-}
-
+};
 
 export default appReducer;

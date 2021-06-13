@@ -6,7 +6,7 @@ import style from './Preloader.module.css';
 
 function Preloader(props) {
   return (
-      <img className={style.preloader} src={preloader} alt='#' />
+    <img className={style.preloader} src={preloader} alt='#' />
   );
 }
 
