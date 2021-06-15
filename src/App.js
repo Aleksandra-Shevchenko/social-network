@@ -1,21 +1,20 @@
 import './App.css';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Redirect, Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { initializeApp } from './redux/appReducer'
 import Navbar from "./components/Navbar/Navbar";
-import DialogsContainer from './components/Dialogs/DialogsContainer';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import FriendsContainer from './components/Friends/FriendsContainer';
-import Login from './components/Login/Login';
 import Landing from './components/Landing/Landing';
 import Preloader from './components/common/Preloader/Preloader';
 
-
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const FriendsContainer = React.lazy(() => import('./components/Friends/FriendsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+const Login = React.lazy(() => import('./components/Login/Login'));
 
 class App extends React.Component {
 
@@ -38,13 +37,19 @@ class App extends React.Component {
             <Navbar />
             <div className='app-content'>
               <Route path='/profile/:userId?'>
-                <ProfileContainer />
+                <Suspense fallback={<Preloader/>}>
+                  <ProfileContainer />
+                </Suspense>
               </Route>
               <Route path='/dialogs'>
-                <DialogsContainer />
+                <Suspense fallback={<Preloader/>}>
+                  <DialogsContainer />
+                </Suspense>
               </Route>
               <Route path='/friends'>
-                <FriendsContainer />
+                <Suspense fallback={<Preloader/>}>
+                  <FriendsContainer />
+                </Suspense>
               </Route>
               <Route path='/news'>
                 <News />
@@ -53,7 +58,9 @@ class App extends React.Component {
                 <Settings />
               </Route>
               <Route path='/users'>
+               <Suspense fallback={<Preloader/>}>
                 <UsersContainer />
+              </Suspense>
               </Route>
             </div>
           </>
@@ -62,7 +69,7 @@ class App extends React.Component {
         <div className='app-landing'>
 
           <Route exact path='/login'>
-            {this.props.isAuth ? <Redirect to='/profile' /> : <Login />}
+            {this.props.isAuth ? <Redirect to='/profile' /> : <Suspense fallback={<Preloader/>}><Login /></Suspense>}
           </Route>
 
           <Route exact path='/'>

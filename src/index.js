@@ -3,7 +3,7 @@ import React from 'react';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { HashRouter  } from 'react-router-dom';
+import { BrowserRouter, HashRouter  } from 'react-router-dom';
 
 import store from './redux/reduxStore';
 import { Provider } from 'react-redux';
@@ -11,11 +11,11 @@ import { Provider } from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>, document.getElementById('root'));
 
 // ReactDOM.render(
