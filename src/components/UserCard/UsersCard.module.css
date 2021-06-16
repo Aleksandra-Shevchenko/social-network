@@ -1,6 +1,98 @@
+.card{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px #465e72 solid;
+  border-radius: 20px;
+  padding: 26px 20px;
+}
+
+
+.avatar_box{
+  width: 120px;
+  height: 120px;
+  border: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: none;
+  margin-right: 20px;
+}
+
+
 .avatar{
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
+  border: none;
+  width: 100%;
   border-radius: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.info_box{
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 4px 0;
+}
+
+.name{
+  width: 100%;
+  font-family:  "Montserrat-Bold";
+  letter-spacing: .4px;
+  color: #354848;
+  font-size: 20px;
+  line-height: 26px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
+}
+
+.status{
+  font-family: "Montserrat-Light";
+  letter-spacing: -.3px;
+  font-size: 14px;
+  margin: 2px 0 0;
+  color: #354848;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.button {
+  font-family: "Montserrat-Semibold";
+  font-size: 12px;
+  text-transform: uppercase;
+  border-radius: 20px;
+  height: 36px;
+  width: 110px;
+  color: #465e72;
+  border: 1px #465e72 solid;
+  box-sizing: border-box;
+  transition: background-color .6s, color .5s ease-in;
+  margin-top: auto;
+}
+
+.button:hover{
+  cursor: pointer;
+  background-color: #465e72;
+  color: #f1f8ff;
+}
+
+.button:disabled{
+  cursor: default;
+  opacity: .6;
+}
+
+.button_add{
+  background-color: #f1f8ff;
+}
+
+.button_delete{
+  background-color: #fff;
 }

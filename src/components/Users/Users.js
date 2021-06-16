@@ -1,7 +1,7 @@
 import style from './Users.module.css';
 import React from 'react';
 import Pagination from '../Pagination/Pagination';
-import UserCard from '../UserCard/UserCard';
+import UsersList from '../UsersList/UsersList';
 
 
 function Users({
@@ -23,17 +23,12 @@ function Users({
         currentPage={currentPage}
         onClick={onPageChanged}
       />
-      {users.map((user) => {
-        return (
-          <UserCard
-            key={user.id} 
-            user={user}
-            followingInProgress={followingInProgress}
-            follow={follow}
-            unfollow={unfollow}
-          />)
-        })
-      }
+      <UsersList
+        users={users}
+        followingInProgress={followingInProgress}
+        follow={follow}
+        unfollow={unfollow}
+      />
     </div>
   );
 };

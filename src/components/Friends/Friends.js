@@ -1,7 +1,7 @@
 import style from './Friends.module.css';
 import React from 'react';
 import Pagination from '../Pagination/Pagination';
-import UserCard from '../UserCard/UserCard';
+import UsersList from '../UsersList/UsersList';
 
 
 function Friends({
@@ -24,7 +24,14 @@ function Friends({
         currentPage={currentFriendsPage}
         onClick={onPageChanged}
       />
-      {friends.map((user) => {
+      <UsersList
+        users={friends}
+        followingInProgress={followingInProgress}
+        follow={follow}
+        unfollow={unfollow}
+        friend={true}
+      />
+      {/* {friends.map((user) => {
         return (
           <UserCard
             key={user.id} 
@@ -34,7 +41,7 @@ function Friends({
             unfollow={unfollow}
           />
         )
-      })}
+      })} */}
     </div>
   );
 };

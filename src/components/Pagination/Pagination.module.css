@@ -4,14 +4,21 @@
   background-color: transparent;
   border: none;
   color: #465e72;
-  width: 24px;
   height: 34px;
   padding: 0;
+  transition: font-size .3s, font-family .3s ease-in;
+  margin:  0 4px;
+}
+
+.page:hover{
+  cursor: pointer;
+  font-size: 24px;
+  font-family: "Kanit-Semibold";
 }
 
 .page_active{
   font-size: 24px;
-  font-weight: bold;
+  font-family: "Kanit-Semibold";
 }
 
 .paginator{
@@ -32,14 +39,20 @@
   background-position: center;
   background-size: 10px 10px;
   background-repeat: no-repeat;
+  transition: background-size .2s ease-in;
+}
+
+.arrow:hover{
+  cursor: pointer;
+  background-size: 12px 12px;
 }
 
 .left{
   background-image: url('../../images/left.svg');
-  margin-right: 6px;
+  margin-right: 2px;
 }
 
 .right{
   background-image: url('../../images/right.svg');
-  margin-left: 6px;
+  margin-left: 2px;
 }

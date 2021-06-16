@@ -1,5 +1,7 @@
 .App {
-  font-family: 'Montserrat-Regular', 'Kanit-Light';
+  font-family: 'Montserrat-Regular', 'Kanit-Light', 'Arial', 'Helvetica', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   display: grid;
   grid-template-rows: 70px 1fr;
   grid-template-columns: 2fr 8fr;
