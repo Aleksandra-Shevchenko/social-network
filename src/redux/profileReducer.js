@@ -3,6 +3,7 @@ import { profileApi, usersApi } from "../api/api";
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
 let inintialState = {
   posts: [
@@ -27,6 +28,9 @@ const profileReducer = (state = inintialState, action) =>{
 
     case SET_STATUS:
       return {...state, status: action.status};
+
+    case SAVE_PHOTO_SUCCESS:
+      return {...state, profile: {...state.profile, photos: action.photos}};
       
     default:
       return state;
@@ -34,9 +38,9 @@ const profileReducer = (state = inintialState, action) =>{
 };
 
 export const addPostActionCreator = (text) => ({type: ADD_POST, newText: text});
-
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE,  profile: profile});
 const setStatus = (status) => ({type: SET_STATUS,  status: status});
+const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
 
 //thunkCreator из него возращаем непосредственно нашу thunk
 export const getPersonalInfo = (userId) => {
@@ -58,6 +62,15 @@ export const updateStatus = (status) => {
     const res = await profileApi.updateStatus(status);
     if (!res.data.resultCode) {
       dispatch(setStatus(status));
+    }
+  }
+};
+
+export const savePhoto = (file) => {
+  return async (dispatch) => {
+    const res = await profileApi.savePhoto(file);
+    if (!res.data.resultCode) {
+      dispatch(savePhotoSuccess(res.data.data.photos));
     }
   }
 };

@@ -5,7 +5,14 @@ import avatarDefault from '../../../images/avatarDefault.svg';
 import ProfileStatus from './ProfileStatus';
 
 
-function ProfileInfo({ profile, status, updateStatus, idAuthUser}) {
+function ProfileInfo({ profile, status, updateStatus, idAuthUser, isOwner, savePhoto}) {
+
+  function handlePhotoSelected(e) {
+    if(e.target.files.length){
+      savePhoto(e.target.files[0])
+    }
+  }
+
 
   if(!profile){
     return <Preloader />
@@ -13,8 +20,15 @@ function ProfileInfo({ profile, status, updateStatus, idAuthUser}) {
 
   return (
     <div className={style.profile_info}>
-      <div>
+      <div className={style.photo_box}>
         <img className={`${style.user_photo} ${!profile.photos.large && style.user_photoDefault}`} src={profile.photos.large || avatarDefault } alt='#'/>
+        {isOwner && (
+          <input
+            type={'file'}
+            onChange={handlePhotoSelected} 
+            className={style.change_photo}
+         />
+        )}
       </div>
       <div className={style.description_box}>
         <div className={style.main_info}>
