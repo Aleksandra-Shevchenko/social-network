@@ -1,18 +1,22 @@
 import style from './ProfileDataForm.module.css';
-// import loginFormSchema from "../../utils/validation/LoginFormSchema";
-
-
+import { profileFormSchema } from "../../../utils/validation/validationFormSchema";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import React from 'react';
 
 
-function ProfileDataForm ({profile, error, saveProfile, idAuthUser}) {
-  console.log(profile);
+function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode}) {
 
-    
   const handleSubmit = (values) => {
     saveProfile(values, idAuthUser);
     console.log(values);
   };
+
+  const contacts = Object.keys(profile.contacts).reduce((obj, key) => {
+    obj[key] = profile.contacts[key] ? profile.contacts[key] : '';
+    return obj;
+  }, {});
+
+  console.log(contacts);
 
   return ( 
     <div className={style.login_box}>
@@ -22,14 +26,20 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser}) {
           aboutMe: profile.aboutMe ? profile.aboutMe : "",
           lookingForAJobDescription: profile.lookingForAJobDescription ? profile.lookingForAJobDescription : "",
           lookingForAJob: profile.lookingForAJob,
+          ...contacts,
         }}
-        // validationSchema={loginFormSchema}
+        validationSchema={profileFormSchema}
         onSubmit={handleSubmit}
       >
+
+
 
         {({ errors, touched, isValid, dirty }) => (
           <div className={style.container}>
             <h1 className={style.title}>HH</h1>
+
+            <button onClick={onEditMode}>exit edit mode</button>
+
             <Form className={style.form}>
               <div className={style.form_row}>
                 <label htmlFor="fullName" className={style.label}>Full name</label>
@@ -68,6 +78,27 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser}) {
                 <label htmlFor="lookingForAJob" className={style.label}>Looking for a job</label>
                 <Field type="checkbox" name="lookingForAJob" id="lookingForAJob" className={style.checkbox}/>
               </div>
+
+
+
+
+              <div> Contacts {Object.keys(profile.contacts).map((key) => {
+                return (
+                  <div className={style.form_row} key={key}>
+                    <label htmlFor={key} className={style.label}>{key}</label>
+                      <Field type="text" name={key} id={key}
+                        className={`
+                        ${style.input}
+                        ${errors[key] && touched[key] ? style.input_error : null}
+                      `}
+                    />
+                    <ErrorMessage name={key} component="span" className={style.error}/>
+                  </div>
+                )
+                })}
+              </div>
+
+
 
               <button type="submit"
                 className={`${style.btn} ${!(dirty && isValid) ? style.btn_disabled : ""}`}

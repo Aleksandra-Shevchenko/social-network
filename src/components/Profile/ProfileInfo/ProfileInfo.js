@@ -8,10 +8,9 @@ import React from 'react';
 
 
 
-function ProfileInfo({ profile, status, updateStatus, idAuthUser, isOwner, savePhoto, saveProfile}) {
+function ProfileInfo({ profile, status, updateStatus, idAuthUser, isOwner, savePhoto, saveProfile, error}) {
 
   const [editMode, setEditMode] = React.useState(false);
-
 
   function handlePhotoSelected(e) {
     if(e.target.files.length){
@@ -19,8 +18,12 @@ function ProfileInfo({ profile, status, updateStatus, idAuthUser, isOwner, saveP
     }
   };
 
-  function handleEditMode() {
+  function handleActiveEditMode() {
     setEditMode(true);
+  };
+
+  function handleExitEditMode() {
+    setEditMode(false);
   };
 
 
@@ -31,12 +34,12 @@ function ProfileInfo({ profile, status, updateStatus, idAuthUser, isOwner, saveP
   return (
     <>
       {editMode ? (
-        <ProfileDataForm profile={profile} isOwner={isOwner} saveProfile={saveProfile} idAuthUser={idAuthUser}/>
+        <ProfileDataForm profile={profile} isOwner={isOwner} saveProfile={saveProfile} idAuthUser={idAuthUser} onEditMode={handleExitEditMode} error={error}/>
         ) : (
           <ProfileData
             profile={profile}
             isOwner={isOwner}
-            onEditMode={handleEditMode}
+            onEditMode={handleActiveEditMode}
             onChangePhoto={handlePhotoSelected}
             status={status}
             updateStatus={updateStatus}
@@ -63,7 +66,7 @@ const ProfileData = ({profile, isOwner, onChangePhoto, onEditMode, status, updat
             type={'file'}
             onChange={onChangePhoto} 
             className={style.change_photo}
-        />
+          />
         )}
       </div>
       <div className={style.description_box}>
@@ -87,9 +90,10 @@ const ProfileData = ({profile, isOwner, onChangePhoto, onEditMode, status, updat
             <span className={style.headline}>Professional skills: </span> 
             {profile.lookingForAJobDescription || 'no description'}
           </p>
-          <div>Contacts : {Object.keys(profile.contacts).map((key) => {
+          <div> Contacts : {Object.keys(profile.contacts).map((key) => {
             return <Contact key={key} title={key} value={profile.contacts[key]}/>
-          }) }</div>
+            })}
+          </div>
         </div>
         <div className={style.photos}>
           <img className={`${style.photo} ${!profile.photos.large && style.photo_default}`} src={profile.photos.large || camera} alt="#"/>

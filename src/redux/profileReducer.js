@@ -1,9 +1,11 @@
 import { profileApi, usersApi } from "../api/api";
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
+const ADD_POST = 'profile/ADD-POST';
+const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
+const SET_STATUS = 'profile/SET_STATUS';
+const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS';
+const SET_ERROR= 'profile/SET_ERROR';
+
 
 let inintialState = {
   posts: [
@@ -13,6 +15,7 @@ let inintialState = {
   ],
   profile: null,
   status: '',
+  error: '',
 };
 
 const profileReducer = (state = inintialState, action) =>{
@@ -31,6 +34,9 @@ const profileReducer = (state = inintialState, action) =>{
 
     case SAVE_PHOTO_SUCCESS:
       return {...state, profile: {...state.profile, photos: action.photos}};
+
+    case SET_ERROR:
+      return {...state, error: action.errorMessage};
       
     default:
       return state;
@@ -41,6 +47,8 @@ export const addPostActionCreator = (text) => ({type: ADD_POST, newText: text});
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE,  profile: profile});
 const setStatus = (status) => ({type: SET_STATUS,  status: status});
 const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
+const setError = (err) => ({type: SET_ERROR , errorMessage: err});
+
 
 //thunkCreator из него возращаем непосредственно нашу thunk
 export const getPersonalInfo = (userId) => {
@@ -80,6 +88,8 @@ export const saveProfile = (values, userId) => {
     const res = await profileApi.saveProfile(values);
     if (!res.data.resultCode) {
       dispatch(getPersonalInfo(userId));
+    } else {
+      dispatch(setError(res.data.messages[0]));
     }
   }
 };

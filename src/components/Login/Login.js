@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import loginFormSchema from "../../utils/validation/LoginFormSchema";
+import { loginFormSchema } from "../../utils/validation/validationFormSchema";
 import {login} from '../../redux/authReducer';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
