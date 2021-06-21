@@ -26,7 +26,7 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
           aboutMe: profile.aboutMe ? profile.aboutMe : "",
           lookingForAJobDescription: profile.lookingForAJobDescription ? profile.lookingForAJobDescription : "",
           lookingForAJob: profile.lookingForAJob,
-          ...contacts,
+          contacts: { ...contacts },
         }}
         validationSchema={profileFormSchema}
         onSubmit={handleSubmit}
@@ -85,14 +85,14 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
               <div> Contacts {Object.keys(profile.contacts).map((key) => {
                 return (
                   <div className={style.form_row} key={key}>
-                    <label htmlFor={key} className={style.label}>{key}</label>
-                      <Field type="text" name={key} id={key}
+                    <label htmlFor={'contacts.' + key} className={style.label}>{key}</label>
+                      <Field type="text" name={'contacts.' + key} id={'contacts.' + key}
                         className={`
                         ${style.input}
-                        ${errors[key] && touched[key] ? style.input_error : null}
+                        ${errors['contacts.' + key] && touched['contacts.' + key] ? style.input_error : null}
                       `}
                     />
-                    <ErrorMessage name={key} component="span" className={style.error}/>
+                    <ErrorMessage name={'contacts.' + key} component="span" className={style.error}/>
                   </div>
                 )
                 })}

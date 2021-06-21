@@ -15,7 +15,7 @@ function  Profile({ profile, status, updateStatus, id, isOwner, savePhoto, saveP
         saveProfile={saveProfile} 
         error={error} 
       />
-      <MyPostsContainer />
+      {isOwner && <MyPostsContainer />}
     </div>
   );
 };

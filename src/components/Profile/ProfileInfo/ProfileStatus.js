@@ -30,15 +30,17 @@ function ProfileStatus(props) {
 
   
   return (
-    <div className={style.profile_status}>
+    <div className={style.status_box}>
       {editMode ? (
-        <div>
-          <input autoFocus={true} onBlur={deactivateEditMode} value={status} onChange={handleChangeStatus} />
-        </div>
+        <input
+          autoFocus={true}
+          onBlur={deactivateEditMode}
+          value={status}
+          onChange={handleChangeStatus}
+          className={style.status_input}
+        />
         ) : (
-          <div>
-            <p onClick={activateEditMode}>{props.status || 'No status'}</p>
-          </div>
+          <p onClick={activateEditMode} className={style.status}>{props.status || 'Set status'}</p>
         )
       }
     </div>

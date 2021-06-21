@@ -1,88 +1,30 @@
-
-.profile_info{
-  display: flex;
+.status_box{
 
 }
 
-.description_box{
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.user_photo{
-  width: 250px;
-  height: 300px;
-  object-fit: cover;
-  box-sizing: border-box;
-}
-
-.user_photoDefault{
-  object-fit: contain;
-  background-color: #f1f8ff;
-  padding: 30px;
-
-}
-
-.header{
-  font-family: "Montserrat-Bold";
-  font-size: 24px;
-  text-transform: uppercase;
+.status{
   color: #465e72;
-  margin: 0;
-  border-bottom: 2px #465e72 solid;
-  line-height: 30px;
-}
-
-.caption{
-  margin: 4px 0;
-  color: #354848;
   font-family: "Montserrat-Regular";
-  text-transform: uppercase;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 32px;
+  margin:  0 0 0 1px;
+  width: 100%;
 }
 
-
-.info{
-  margin: 20px 0;
-}
-
-
-.headline{
-  font-family: "Montserrat-Semibold";
-  font-size: 16px;
-  /* text-transform: uppercase; */
-  color: #354848;
-}
-
-
-.text{
-  color: #354848;
-  font-family: "Montserrat-Regular";
-
-}
-
-
-.photos{
-  /* align-self: end; */
-}
-
-
-.photo {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin-left: 10px;
+.status_input{
+  font-size: 14px;
   border: none;
+  border-radius: 20px;
+  padding: 2px 1px;
+  line-height: 28px;
+  margin: 0;
+  outline: none;
+  width: 100%;
+  color: #465e72;
   box-sizing: border-box;
 }
 
-.photo:first-child {
-  margin-left: 0px;
-}
-
-.photo_default {
-  padding: 24px;
+.status_input:focus{
+  /* border: 1px #465e72 solid; */
   background-color: #f1f8ff;
 }
