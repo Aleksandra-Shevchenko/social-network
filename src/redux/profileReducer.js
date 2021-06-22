@@ -90,6 +90,7 @@ export const saveProfile = (values, userId) => {
       dispatch(getPersonalInfo(userId));
     } else {
       dispatch(setError(res.data.messages[0]));
+      return Promise.reject(res.data.messages[0]);
     }
   }
 };

@@ -25,7 +25,7 @@ const icons = {
   'mainLink' : mainLink,
   'twitter' : twitter,
   'website' : website,
-}
+};
 
 function ProfileInfo({ profile, status, updateStatus, idAuthUser, isOwner, savePhoto, saveProfile, error}) {
 
@@ -72,9 +72,10 @@ function ProfileInfo({ profile, status, updateStatus, idAuthUser, isOwner, saveP
 const Contact = ({title, value}) => {
   return (
     <div className={style.icon_box}>
-      <a href={value} target='_blank' rel='noreferrer' className={style.icon_link}>
-        <img src={icons[title]} alt='social netwok' className={value ? style.icon : style.icon_empty}/>
-      </a>
+    {value ?  (<a href={value} target='_blank' rel='noreferrer' className={style.icon_link}>
+      <img src={icons[title]} alt='social netwok' className={style.icon}/>
+    </a>) : (<img src={icons[title]} alt='social netwok' className={style.icon_empty}
+    />)}
     </div>
   )
 };

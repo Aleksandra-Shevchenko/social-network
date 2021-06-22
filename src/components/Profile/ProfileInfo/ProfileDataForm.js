@@ -7,7 +7,10 @@ import React from 'react';
 function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode}) {
 
   const handleSubmit = (values) => {
-    saveProfile(values, idAuthUser);
+    saveProfile(values, idAuthUser)
+      .then(()=>{
+        onEditMode();
+      })
     console.log(values);
   };
 
@@ -19,7 +22,7 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
   console.log(contacts);
 
   return ( 
-    <div className={style.login_box}>
+    <div className={style.profile_form_box}>
       <Formik
         initialValues={{ 
           fullName: profile.fullName,
@@ -36,11 +39,12 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
 
         {({ errors, touched, isValid, dirty }) => (
           <div className={style.container}>
-            <h1 className={style.title}>HH</h1>
 
             <button onClick={onEditMode}>exit edit mode</button>
 
             <Form className={style.form}>
+              <h2 className={style.title}>Basic information</h2>
+
               <div className={style.form_row}>
                 <label htmlFor="fullName" className={style.label}>Full name</label>
                 <Field type="text" name="fullName" id="fullName"
@@ -57,6 +61,7 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
                 <Field  as="textarea" type="text" name="aboutMe" id="aboutMe"
                   className={`
                     ${style.input}
+                    ${style.input_textarea}
                     ${errors.aboutMe && touched.aboutMe ? style.input_error : null}
                   `}
                 />
@@ -68,21 +73,22 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
                 <Field  as="textarea" type="text" name="lookingForAJobDescription" id="lookingForAJobDescription"
                   className={`
                     ${style.input}
+                    ${style.input_textarea}
                     ${errors.lookingForAJobDescription && touched.lookingForAJobDescription ? style.input_error : null}
                   `}
                 />
                 <ErrorMessage name="lookingForAJobDescription" component="span" className={style.error}/>
               </div>
               
+              <h2 className={style.title}>Career</h2>
               <div className={style.form_checkbox}>
                 <label htmlFor="lookingForAJob" className={style.label}>Looking for a job</label>
                 <Field type="checkbox" name="lookingForAJob" id="lookingForAJob" className={style.checkbox}/>
               </div>
 
-
-
-
-              <div> Contacts {Object.keys(profile.contacts).map((key) => {
+              <h2 className={style.title}>Contacts</h2>
+              <div>
+              {Object.keys(profile.contacts).map((key) => {
                 return (
                   <div className={style.form_row} key={key}>
                     <label htmlFor={'contacts.' + key} className={style.label}>{key}</label>
