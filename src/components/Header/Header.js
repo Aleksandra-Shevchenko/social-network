@@ -5,7 +5,7 @@ import style from './Header.module.css';
 import {Link} from 'react-router-dom';
 
 
-function Header({ isAuth, login, logout, photo}) {
+function Header({ isAuth, login, logout, photo, name}) {
 
 
   return (
@@ -22,9 +22,9 @@ function Header({ isAuth, login, logout, photo}) {
           <Link className={style.login} to='/'>Sign up</Link>
         </div>
       )}
-
+      
       <div className={isAuth ? style.user_box : style.hidden_box}>
-        <Link to='/profile' className={style.name}>{login}</Link>
+        <Link to='/profile' className={style.name}>{name || 'loading...'}</Link>
         <img className={style.avatar} src={photo ? photo : avatarDefault} alt=""/>
         <button className={style.logout} onClick={logout} type='button'></button>
       </div>

@@ -27,24 +27,25 @@ const icons = {
   'website' : website,
 };
 
-function ProfileInfo({ profile, status, updateStatus, idAuthUser, isOwner, savePhoto, saveProfile, error}) {
-
-  const [editMode, setEditMode] = React.useState(false);
+function ProfileInfo({
+  profile,
+  status,
+  updateStatus,
+  idAuthUser,
+  isOwner,
+  savePhoto,
+  saveProfile,
+  error,
+  handleExitEditMode,
+  editMode,
+  handleActiveEditMode,
+}) {
 
   function handlePhotoSelected(e) {
     if(e.target.files.length){
       savePhoto(e.target.files[0]);
     }
   };
-
-  function handleActiveEditMode() {
-    setEditMode(true);
-  };
-
-  function handleExitEditMode() {
-    setEditMode(false);
-  };
-
 
   if(!profile){
     return <Preloader />

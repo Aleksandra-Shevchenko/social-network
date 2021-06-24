@@ -1,17 +1,42 @@
 .post{
-  margin-top: 20px;
+  margin: 20px 0 0;
+  padding: 0 0 10px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  border: 2px #fff solid;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.post_box{
+  display: flex;
+  margin-bottom: 8px;
 }
 
 .avatar{
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   object-fit: cover;
   border-radius: 100%;
   border: 1px #465e72 solid;
+  margin-right: 8px;
 }
 
-.text {
-  margin-left: 20px;
+.author{
+  margin: 0;
+  font-family: "Kanit-Regular";
+  font-size: 14px;
+  color: #354848;
+  font-weight: 300;
+  opacity: .8;
+  align-self: center;
+}
+
+.text{
+  font-family: "Montserrat-Regular";
+  color: #465e72;
+  font-size: 18px;
+  margin: 0;
 }

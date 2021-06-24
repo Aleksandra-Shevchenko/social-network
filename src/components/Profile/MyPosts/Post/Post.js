@@ -1,14 +1,17 @@
 import style from './Post.module.css';
+import avatarDefault from "../../../../images/avatarDefault.svg";
 
 
-function Post({ message }) {
+
+function Post({ message, profile }) {
   return (
-    <>
-      <div className={style.post}>
-        <img className={style.avatar} src='https://static.mycity.travel/manage/uploads/7/36/112961/1/2500px-fribourgregion-20190704-dscf3505_3000.jpg' alt=''/>
-        <p className={style.text}>{message}</p>
+    <div className={style.post}>
+      <div className={style.post_box}>
+        <img className={style.avatar} src={profile.photos.small} alt=''/>
+        <p className={style.author}>{profile.fullName}</p>
       </div>
-    </>
+      <p className={style.text}>{message}</p>
+    </div>
   )
 }
 

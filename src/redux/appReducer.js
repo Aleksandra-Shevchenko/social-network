@@ -1,7 +1,8 @@
 import { getAuthUser } from "./authReducer";
 import { getUsers } from "./userReducer";
+import { getPersonalInfo } from "./profileReducer";
 
-const SET_INITIALIZED = 'SET_INITIALIZED';
+const SET_INITIALIZED = 'app/SET_INITIALIZED';
 
 let inintialState = {
   initialized: false,
@@ -25,8 +26,11 @@ export const initializeApp = () => {
   return (dispatch) => {
     dispatch(getUsers());
     dispatch(getAuthUser())
-      .then(() => {
-        dispatch(setInitialized());
+      .then((res) => {
+        if(res) {
+          dispatch(getPersonalInfo(res.id))
+        }
+          dispatch(setInitialized());
       })
   }
 };

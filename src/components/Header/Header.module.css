@@ -61,6 +61,14 @@
   text-align: center;
   padding: 6px 20px;
   text-decoration: none;
+  min-width: 100px;
+  transition: opacity .3s ease-in;
+
+}
+
+.name:hover{
+  cursor: pointer;
+  opacity: .6;
 }
 
 .login{
@@ -92,4 +100,10 @@
   width: 30px;
   height: 30px;
   border: none;
+  transition: opacity .3s ease-in;
+}
+
+.logout:hover{
+  cursor: pointer;
+  opacity: .6;
 }

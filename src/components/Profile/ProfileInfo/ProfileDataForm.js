@@ -40,7 +40,7 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
         {({ errors, touched, isValid, dirty }) => (
           <div className={style.container}>
 
-            <button onClick={onEditMode}>exit edit mode</button>
+            <button onClick={onEditMode} className={style.close_btn}></button>
 
             <Form className={style.form}>
               <h2 className={style.title}>Basic information</h2>
@@ -104,8 +104,6 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
                 })}
               </div>
 
-
-
               <button type="submit"
                 className={`${style.btn} ${!(dirty && isValid) ? style.btn_disabled : ""}`}
                 disabled={!(dirty && isValid)}
@@ -119,6 +117,7 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
                 </div>
               ) : null}
             </Form>
+            <button onClick={onEditMode} className={style.close}>Don't save changes. Exit edit mode.</button>
           </div>
         )}
 

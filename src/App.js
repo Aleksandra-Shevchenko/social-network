@@ -27,7 +27,6 @@ class App extends React.Component {
       return <Preloader />
     }
 
-
     return (
       <div className="App" >
         <HeaderContainer {...this.props} />
@@ -92,7 +91,9 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
+  profile: state.profilePage.profile,
   photo: state.profilePage.profile ? state.profilePage.profile.photos.small : null,
+  fullName: state.profilePage.profile ? state.profilePage.profile.fullName : null,
   login: state.auth.login,
   authUserId: state.auth.id,
   initialized: state.app.initialized,

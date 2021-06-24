@@ -3,7 +3,6 @@ import { authApi } from "../api/api";
 const SET_AUTH_USER_DATA = 'auth/SET_AUTH_USER_DATA';
 const SET_ERROR= 'auth/SET_ERROR';
 
-
 let inintialState = {
   id: null,
   email: null,
@@ -24,11 +23,13 @@ const authReducer = (state = inintialState, action) => {
         ...action.data,
         error: '',
       };
+
     case SET_ERROR:
       return {
         ...state,
         error: action.errorMessage,
       };
+
     default:
       return state;
   }
@@ -39,6 +40,7 @@ export const getAuthUser = () => {
     const res = await authApi.authUser();
     if (!res.data.resultCode) {
       dispatch(setAuthUserData({...res.data.data, isAuth: true}));
+      return res.data.data;
     }
   }
 };
@@ -67,7 +69,5 @@ export const logout = () => {
     }
   }
 };
-
-
 
 export default authReducer;

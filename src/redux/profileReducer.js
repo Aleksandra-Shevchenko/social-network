@@ -5,6 +5,8 @@ const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 const SET_STATUS = 'profile/SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS';
 const SET_ERROR= 'profile/SET_ERROR';
+const TOGGLE_IS_FETCHING = 'profile/TOGGLE_IS_FETCHING';
+
 
 
 let inintialState = {
@@ -16,6 +18,7 @@ let inintialState = {
   profile: null,
   status: '',
   error: '',
+  isFetching: false,
 };
 
 const profileReducer = (state = inintialState, action) =>{
@@ -37,6 +40,9 @@ const profileReducer = (state = inintialState, action) =>{
 
     case SET_ERROR:
       return {...state, error: action.errorMessage};
+  
+    case TOGGLE_IS_FETCHING:
+      return {...state, isFetching: action.isFetching};
       
     default:
       return state;
@@ -44,6 +50,8 @@ const profileReducer = (state = inintialState, action) =>{
 };
 
 export const addPostActionCreator = (text) => ({type: ADD_POST, newText: text});
+export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE,  profile: profile});
 const setStatus = (status) => ({type: SET_STATUS,  status: status});
 const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
@@ -53,8 +61,10 @@ const setError = (err) => ({type: SET_ERROR , errorMessage: err});
 //thunkCreator из него возращаем непосредственно нашу thunk
 export const getPersonalInfo = (userId) => {
   return async (dispatch) => {
+    dispatch(toggleIsFetching(true));
     const data = await usersApi.getUserInfo(userId);
     dispatch(setUserProfile(data));
+    dispatch(toggleIsFetching(false));
   }
 };
 

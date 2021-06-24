@@ -1,8 +1,10 @@
-import { Field, Form, Formik } from 'formik';
+import { Field, Form, Formik, ErrorMessage } from 'formik';
+import style from './AddMessageForm.module.css';
 
-function AddMessageForm(props) {
+
+function AddMessageForm({error, onSubmit}) {
   const submit = (values, { setSubmitting }) => {
-    props.onSubmit(values);
+    onSubmit(values);
   }
   
   return (
@@ -10,10 +12,28 @@ function AddMessageForm(props) {
       initialValues={{ message: "" }}
       onSubmit={submit}
     >
-      {({ isSubmitting }) => (
-        <Form className={props.style}>
-          <Field type="text" name="message" placeholder='Enter your message'/>
-          <button type="submit" disabled={isSubmitting}>Send</button>
+      {({ isSubmitting, errors, touched, isValid, dirty }) => (
+        <Form className={style.form}>
+          <h2 className={style.title}>Create post</h2>
+          <Field  as="textarea" name="message" id="message" placeholder='Enter your post'
+          className={`
+            ${style.input}
+            ${errors.fullName && touched.fullName ? style.input_error : null}`}
+          />
+          <ErrorMessage name="message" component="span" className={style.error} />
+          <button type="submit"
+            // disabled={isSubmitting}
+            className={`${style.btn} ${!(dirty && isValid) ? style.btn_disabled : ""}`}
+            disabled={!(dirty && isValid)}
+          >
+              Publish
+          </button>
+          {error ? (
+                <div className={style.server_errorContainer}>
+                  <p className={style.server_error}>{`Something wrong!`}</p>
+                  <p className={style.server_error}>{error}</p>
+                </div>
+            ) : null}
         </Form>
       )}
     </Formik>
