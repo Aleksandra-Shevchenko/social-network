@@ -1,7 +1,7 @@
 @import url('./vendor/normalize.css');
 @import url('./vendor/fonts/fonts.css');
 
-body {
+/* body {
   margin: 0;
   font-family: 'Kanit', sans-serif, -apple-system, BlinkMacSystemFont,;
   -webkit-font-smoothing: antialiased;
@@ -12,4 +12,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */

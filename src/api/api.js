@@ -58,11 +58,15 @@ export const authApi = {
   logout(){
     return api.delete(`auth/login`);
   }
-}
+};
 
+//captcha
+export const securityApi = {
+  getCaptchaUrl() {
+    return api.get('security/get-captcha-url');
+  }
 
-
-
+};
 
 //
 export const profileApi = {

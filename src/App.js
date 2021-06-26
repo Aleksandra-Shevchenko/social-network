@@ -72,7 +72,7 @@ class App extends React.Component {
           </Route>
 
           <Route exact path='/'>
-            <Landing totalUsersCount={this.props.totalUsersCount}/>
+            {!this.props.isAuth && <Landing totalUsersCount={this.props.totalUsersCount}/>}
           </Route>
 
         </div>
