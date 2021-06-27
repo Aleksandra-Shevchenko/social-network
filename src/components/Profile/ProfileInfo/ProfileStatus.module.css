@@ -1,27 +1,43 @@
 .status_box{
-
+  width: 100%;
+  display: flex;
 }
 
 .status{
   color: #465e72;
   font-family: "Montserrat-Regular";
   font-size: 14px;
-  line-height: 32px;
+  line-height: 20px;
   margin:  0 0 0 1px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+}
+
+.hover:hover{
+  cursor: pointer;
+  opacity: .6;
+}
+
+
+.no_status{
+  color: #354848;
+  font-family: "Kanit-Light";
 }
 
 .status_input{
   font-size: 14px;
+  line-height: 20px;
   border: none;
   border-radius: 20px;
-  padding: 2px 1px;
-  line-height: 28px;
+  padding: 6px 1px;
   margin: 0;
   outline: none;
   width: 100%;
   color: #465e72;
   box-sizing: border-box;
+  height: 32px;
 }
 
 .status_input:focus{

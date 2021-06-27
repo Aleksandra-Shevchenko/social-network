@@ -6,6 +6,7 @@ const SET_STATUS = 'profile/SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS';
 const SET_ERROR= 'profile/SET_ERROR';
 const TOGGLE_IS_FETCHING = 'profile/TOGGLE_IS_FETCHING';
+const TOGGLE_IS_SAVING = 'profile/TOGGLE_IS_SAVING';
 
 
 
@@ -19,6 +20,7 @@ let inintialState = {
   status: '',
   error: '',
   isFetching: false,
+  isSaving: false,
 };
 
 const profileReducer = (state = inintialState, action) =>{
@@ -43,6 +45,9 @@ const profileReducer = (state = inintialState, action) =>{
   
     case TOGGLE_IS_FETCHING:
       return {...state, isFetching: action.isFetching};
+
+    case TOGGLE_IS_SAVING:
+      return {...state, isSaving: action.isSaving};
       
     default:
       return state;
@@ -51,6 +56,7 @@ const profileReducer = (state = inintialState, action) =>{
 
 export const addPostActionCreator = (text) => ({type: ADD_POST, newText: text});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const toggleIsSaving = (isSaving) => ({type: TOGGLE_IS_SAVING, isSaving});
 
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE,  profile: profile});
 const setStatus = (status) => ({type: SET_STATUS,  status: status});
@@ -70,13 +76,18 @@ export const getPersonalInfo = (userId) => {
 
 export const getStatus = (userId) => {
   return async (dispatch) => {
-    const res = await profileApi.getStatus(userId);
-    dispatch(setStatus(res.data));
+    try {
+      const res = await profileApi.getStatus(userId);
+      dispatch(setStatus(res.data));
+    } catch(err) {
+      //задиспатчить ошибку и вывести
+    }
   }
 };
 
 export const updateStatus = (status) => {
   return async (dispatch) => {
+    dispatch(setStatus('Saving...'));
     const res = await profileApi.updateStatus(status);
     if (!res.data.resultCode) {
       dispatch(setStatus(status));
@@ -86,10 +97,12 @@ export const updateStatus = (status) => {
 
 export const savePhoto = (file) => {
   return async (dispatch) => {
+    dispatch(toggleIsSaving(true));
     const res = await profileApi.savePhoto(file);
     if (!res.data.resultCode) {
       dispatch(savePhotoSuccess(res.data.data.photos));
     }
+    dispatch(toggleIsSaving(false));
   }
 };
 

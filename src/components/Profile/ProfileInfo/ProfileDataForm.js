@@ -6,10 +6,11 @@ import React from 'react';
 
 function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode}) {
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, {setSubmitting}) => {
     saveProfile(values, idAuthUser)
       .then(()=>{
         onEditMode();
+        setSubmitting(false);
       })
     console.log(values);
   };
@@ -37,7 +38,7 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
 
 
 
-        {({ errors, touched, isValid, dirty }) => (
+        {({ errors, touched, isValid, dirty, isSubmitting }) => (
           <div className={style.container}>
 
             <button onClick={onEditMode} className={style.close_btn}></button>
@@ -105,8 +106,8 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
               </div>
 
               <button type="submit"
-                className={`${style.btn} ${!(dirty && isValid) ? style.btn_disabled : ""}`}
-                disabled={!(dirty && isValid)}
+                className={`${style.btn} ${!(dirty && isValid) || isSubmitting ? style.btn_disabled : ""}`}
+                disabled={!(dirty && isValid) || isSubmitting}
               >
                 Save
               </button>

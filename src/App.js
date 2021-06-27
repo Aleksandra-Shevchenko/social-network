@@ -18,12 +18,23 @@ const Login = React.lazy(() => import('./components/Login/Login'));
 
 class App extends React.Component {
 
+  catchAllUnhandleErrors = (promiseRejectionEvent) => {
+    //задиспатичить ошибку в app редьюсер и вывести красиво
+    // alert(promiseRejectionEvent);
+    console.log(promiseRejectionEvent);
+  }
+
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener("unhandledrejection", this.catchAllUnhandleErrors);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("unhandledrejection", this.catchAllUnhandleErrors);
   }
   
   render() {
-    if(!this.props.initialized){
+    if (!this.props.initialized) {
       return <Preloader />
     }
 
@@ -39,6 +50,9 @@ class App extends React.Component {
                 <Suspense fallback={<Preloader/>}>
                   <ProfileContainer />
                 </Suspense>
+              </Route>
+              <Route exact path='/'>
+                <Redirect to='/profile' />
               </Route>
               <Route path='/dialogs'>
                 <Suspense fallback={<Preloader/>}>
@@ -66,24 +80,25 @@ class App extends React.Component {
         )}
 
         <div className='app-landing'>
-
           <Route exact path='/login'>
-            {this.props.isAuth ? <Redirect to='/profile' /> : <Suspense fallback={<Preloader/>}><Login /></Suspense>}
+            {this.props.isAuth 
+              ? <Redirect to='/profile' />
+              : <Suspense fallback={<Preloader/>}><Login /></Suspense>
+            }
           </Route>
 
           <Route exact path='/'>
             {!this.props.isAuth && <Landing totalUsersCount={this.props.totalUsersCount}/>}
           </Route>
-
         </div>
-
+{/* 
         <Route>
           {this.props.isAuth ? (
             <Redirect to='/profile'/>
           ) : (
             <Redirect to='/'/>
           )}
-        </Route>
+        </Route> */}
 
       </div>
   )};

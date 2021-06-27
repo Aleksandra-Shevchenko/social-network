@@ -39,6 +39,15 @@
   align-items: center;
 }
 
+.link:hover{
+  font-family: "Montserrat-Semibold";
+  cursor: pointer;
+}
+
+
+
+
+
 .item:first-child .link{
   justify-content: center;
 

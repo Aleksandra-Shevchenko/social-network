@@ -45,6 +45,7 @@ const mapStateToProps = (state) => ({
   status: state.profilePage.status,
   error: state.profilePage.error,
   isFetching: state.profilePage.isFetching,
+  isSaving: state.profilePage.isSaving,
 });
 
 

@@ -39,6 +39,7 @@ function ProfileInfo({
   handleExitEditMode,
   editMode,
   handleActiveEditMode,
+  isSaving,
 }) {
 
   function handlePhotoSelected(e) {
@@ -64,6 +65,7 @@ function ProfileInfo({
             status={status}
             updateStatus={updateStatus}
             idAuthUser={idAuthUser}
+            isSaving={isSaving}
           />
         )}
     </>
@@ -81,19 +83,47 @@ const Contact = ({title, value}) => {
   )
 };
 
-const ProfileData = ({profile, isOwner, onChangePhoto, onEditMode, status, updateStatus, idAuthUser, }) => { 
+const ProfileData = ({profile, isOwner, onChangePhoto, onEditMode, status, updateStatus, idAuthUser, isSaving}) => { 
+  
+  const selectedPhotoRef = React.useRef();
+
   return (
     <div className={style.profile_info}>
       <div className={style.photo_box}>
-        <img className={`${style.user_photo} ${!profile.photos.large && style.user_photoDefault}`} src={profile.photos.large || avatarDefault } alt='#'/>
+        {isSaving ? (
+          <Preloader />
+        ) : (
+          <img className={`${style.user_photo} ${!profile.photos.large && style.user_photoDefault}`} src={profile.photos.large || avatarDefault } alt='#'/>
+        )}
+        
         {isOwner && (
-          <input
-            type={'file'}
-            onChange={onChangePhoto} 
-            className={style.change_photo}
-          />
+          <div className={style.change_photo_box}>
+            <label for='photo_file' className={style.label}>
+              <input
+                type={'file'}
+                onChange={onChangePhoto} 
+                className={style.change_photo_input}
+                id='photo_file'
+                ref={selectedPhotoRef}
+              />
+              {!isSaving &&
+                <button
+                  className={style.input_file_button_text} 
+                  onClick={() => selectedPhotoRef.current.click()}
+                  disabled={isSaving}
+                />
+              }
+            </label>
+            <input
+              type={'file'}
+              onChange={onChangePhoto} 
+              className={style.change_photo_input}
+              id='photo_file'
+            />
+          </div>
         )}
       </div>
+      
       <div className={style.description_box}>
         <div className={style.main_info}>
           <h2 className={style.header} >{profile.fullName}</h2>

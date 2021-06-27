@@ -6,7 +6,6 @@ function ProfileStatus(props) {
   const [editMode, setEditMode] = React.useState(false);
   const [status, setStatus] = React.useState(props.status);
 
-
   function activateEditMode() {
     if(props.noChanges){
       setEditMode(false);
@@ -17,7 +16,9 @@ function ProfileStatus(props) {
 
   function deactivateEditMode() {
     setEditMode(false);
-    props.updateStatus(status);
+    if(props.status !== status){
+      props.updateStatus(status);
+    }
   };
 
   function handleChangeStatus(e) {
@@ -32,7 +33,7 @@ function ProfileStatus(props) {
   return (
     <div className={style.status_box}>
       {editMode ? (
-        <input
+        <textarea
           autoFocus={true}
           onBlur={deactivateEditMode}
           value={status}
@@ -40,7 +41,11 @@ function ProfileStatus(props) {
           className={style.status_input}
         />
         ) : (
-          <p onClick={activateEditMode} className={style.status}>{props.status || 'Set status'}</p>
+          <p onClick={activateEditMode}
+            className={`${style.status} ${!props.noChanges && style.hover} ${!props.status && style.no_status}`}
+          >
+            {props.status || `➜ Set status`}
+          </p>
         )
       }
     </div>

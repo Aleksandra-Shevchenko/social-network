@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 ReactDOM.render(
   <React.StrictMode>
     <HashRouter basename={process.env.PUBLIC_URL}>
+      {/* создаем контекст  для App, что бы все компоненты имели к нему доступ*/}
       <Provider store={store}>
         <App />
       </Provider>

@@ -1,17 +1,74 @@
 
 .profile_info{
   display: flex;
+  width: 100%;
 }
 
 .photo_box{
   width: 250px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   flex: none;
+  position: relative;
+  height: 300px;
 }
 
-.change_photo{
-  width: 70%;
+.change_photo_box{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.photo_box:hover .change_photo_box{
+  display: flex;
+}
+
+.label{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_file_button_text{
+  font-family: "Kanit-Regular";
+  text-transform: uppercase;
+  color: #465e72;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  background-image: url('../../../images/editUser.svg');
+  background-color: transparent;
+  background-position: center;
+  background-size: 100px 100px;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.input_file_button_text:disabled{
+  cursor: not-allowed;
+  opacity: .7;
+}
+
+.change_photo_input{
+  /* width: 70%; */
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
 }
 
 .user_photo{
@@ -32,16 +89,20 @@
 
 
 .description_box{
-  padding: 0 20px;
+  padding: 0 0 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: calc(100% - 250px);
+  box-sizing: border-box;
 }
 
 
 .main_info{
   position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .header{
@@ -49,7 +110,7 @@
   font-family: "Montserrat-Regular";
   font-size: 40px;
   color: #465e72;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   line-height: 30px;
 }
 

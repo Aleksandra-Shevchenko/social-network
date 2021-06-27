@@ -4,7 +4,7 @@
   -webkit-font-smoothing: antialiased;
   display: grid;
   grid-template-rows: 70px 1fr;
-  grid-template-columns: 2fr 8fr;
+  grid-template-columns: 210px 1fr;
   gap: 10px;
   grid-template-areas: 
   'header header'
@@ -21,6 +21,7 @@
   background-color:#fdfeff;
   padding: 20px 0;
   min-width: 100%;
+  box-sizing: border-box;
 }
 
 .app-landing{

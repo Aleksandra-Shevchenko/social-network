@@ -4,7 +4,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import React from 'react';
 
 
-function  Profile({ profile, status, updateStatus, id, isOwner, savePhoto, saveProfile, error}) {
+function  Profile({ profile, status, updateStatus, id, isOwner, savePhoto, saveProfile, error, isSaving}) {
 
   const [editMode, setEditMode] = React.useState(false);
 
@@ -30,6 +30,7 @@ function  Profile({ profile, status, updateStatus, id, isOwner, savePhoto, saveP
         handleExitEditMode={handleExitEditMode}
         handleActiveEditMode={handleActiveEditMode}
         editMode={editMode}
+        isSaving={isSaving}
       />
       {(isOwner && !editMode) && <MyPostsContainer profile={profile}/>}
     </div>

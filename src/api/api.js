@@ -74,12 +74,15 @@ export const profileApi = {
     return api.get(`profile/${userId}`)
     .then(res => res.data)
   },
+
   getStatus(userId) {
     return api.get(`profile/status/${userId}`)
   },
+
   updateStatus(status){
     return api.put(`profile/status`, {status: status}) 
   },
+
   savePhoto(photoFile){
     const formData = new FormData();
     formData.append('image', photoFile);
@@ -87,6 +90,7 @@ export const profileApi = {
       'Content-Type': 'multipart/form-data',
     });
   },
+  
   saveProfile(values){
     return api.put(`profile`, values)
   },
