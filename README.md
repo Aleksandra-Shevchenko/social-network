@@ -7,6 +7,7 @@
 
 # "Social network" на React и Redux
 [**social-network**](https://aleksandra-shevchenko.github.io/social-network) (открыть проект в браузере)  
+
 Для входа введите данные тестового аккаунта:
 * Email: free@samuraijs.com
 * Password: free
