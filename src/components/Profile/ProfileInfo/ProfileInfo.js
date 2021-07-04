@@ -98,7 +98,7 @@ const ProfileData = ({profile, isOwner, onChangePhoto, onEditMode, status, updat
         
         {isOwner && (
           <div className={style.change_photo_box}>
-            <label for='photo_file' className={style.label}>
+            <label htmlFor='photo_file' className={style.label}>
               <input
                 type={'file'}
                 onChange={onChangePhoto} 

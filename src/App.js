@@ -91,14 +91,14 @@ class App extends React.Component {
             {!this.props.isAuth && <Landing totalUsersCount={this.props.totalUsersCount}/>}
           </Route>
         </div>
-{/* 
+
         <Route>
           {this.props.isAuth ? (
             <Redirect to='/profile'/>
           ) : (
             <Redirect to='/'/>
           )}
-        </Route> */}
+        </Route>
 
       </div>
   )};

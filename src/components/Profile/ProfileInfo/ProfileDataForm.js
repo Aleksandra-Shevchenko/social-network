@@ -11,16 +11,13 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
       .then(()=>{
         onEditMode();
         setSubmitting(false);
-      })
-    console.log(values);
+      });
   };
 
   const contacts = Object.keys(profile.contacts).reduce((obj, key) => {
     obj[key] = profile.contacts[key] ? profile.contacts[key] : '';
     return obj;
   }, {});
-
-  console.log(contacts);
 
   return ( 
     <div className={style.profile_form_box}>
@@ -107,7 +104,7 @@ function ProfileDataForm ({profile, error, saveProfile, idAuthUser, onEditMode})
 
               <button type="submit"
                 className={`${style.btn} ${!(dirty && isValid) || isSubmitting ? style.btn_disabled : ""}`}
-                disabled={!(dirty && isValid) || isSubmitting}
+                disabled={isSubmitting || !(dirty && isValid)}
               >
                 Save
               </button>

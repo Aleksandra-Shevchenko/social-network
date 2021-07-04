@@ -4,7 +4,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import React from 'react';
 
 
-function  Profile({ profile, status, updateStatus, id, isOwner, savePhoto, saveProfile, error, isSaving}) {
+function Profile({ profile, status, updateStatus, id, isOwner, savePhoto, saveProfile, error, isSaving}) {
 
   const [editMode, setEditMode] = React.useState(false);
 
