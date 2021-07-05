@@ -11,14 +11,21 @@ import { WithAuthRedirect } from "../../hoc/WithAuthRedirect";
 function FriendsContainer({currentFriendsPage, pageFriendsSize, getUserFriends, setCurrentFriendsPage, ...props}) {
 
   const onPageChanged = (pageNum) => {
-    setCurrentFriendsPage(pageNum);
-    getUserFriends(pageNum, pageFriendsSize);
+    if(pageNum !== currentFriendsPage){
+      setCurrentFriendsPage(pageNum);
+      getUserFriends(pageNum, pageFriendsSize);
+    }
   };
 
   React.useEffect(() => {
     getUserFriends(currentFriendsPage, pageFriendsSize);
-  }, [getUserFriends, currentFriendsPage, pageFriendsSize]);
-  
+  }, []);
+
+  React.useEffect(() => {
+    if(props.friends.length < pageFriendsSize){
+      getUserFriends(currentFriendsPage, pageFriendsSize);
+    }
+  }, [getUserFriends, currentFriendsPage, pageFriendsSize, props.friends.length]);
 
   return (
     <>

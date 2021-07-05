@@ -32,11 +32,13 @@ const userReducer = (state = inintialState, action) =>{
       return {
         ...state,
         users: updateObjectInArr(state.users, action.userId, 'id', {followed: true}),
+        totalFriendsCount: state.totalFriendsCount + 1,
       };
     case UNFOLLOW: 
       return {
         ...state,
         users: updateObjectInArr(state.users, action.userId, 'id', {followed: false}),
+        totalFriendsCount: state.totalFriendsCount - 1,
       };
     case SET_USERS:
       return {...state, users: [...action.users]};
@@ -46,7 +48,7 @@ const userReducer = (state = inintialState, action) =>{
 
     case SET_FRIENDS_AFTER_DELETE:
       return {...state,
-        friends: state.friends.filter((item) => item.id !== action.userId )
+        friends: state.friends.filter((item) => item.id !== action.userId),
       };
 
     case SET_CURRENT_PAGE:
@@ -136,6 +138,7 @@ export const unfollow = (userId) => {
     const apiMethod = usersApi.unfollowFriend.bind(usersApi);
     followUnfollowFlow(dispatch, userId, apiMethod, unfollowSuccess);
     dispatch(setFriendsAfterDelete(userId));
+    // dispatch(setTotalFriendsCount(data.totalCount));
   }
 };
 
