@@ -9,7 +9,6 @@ const TOGGLE_IS_FETCHING = 'profile/TOGGLE_IS_FETCHING';
 const TOGGLE_IS_SAVING = 'profile/TOGGLE_IS_SAVING';
 
 
-
 let inintialState = {
   posts: [
     {id: '1', text: 'How are you?'},
@@ -23,6 +22,8 @@ let inintialState = {
   isSaving: false,
 };
 
+
+// reducer это чистая функция, которая принимает стейт и экшен и возращает новый стейт
 const profileReducer = (state = inintialState, action) =>{
   switch (action.type) {
     case ADD_POST:
@@ -54,17 +55,22 @@ const profileReducer = (state = inintialState, action) =>{
   }
 };
 
+// actionCreator - это вспомогательная функция, которая возвращает объект action,
+// необходима, что бы action не создавался внутри react (UI)
 export const addPostActionCreator = (text) => ({type: ADD_POST, newText: text});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleIsSaving = (isSaving) => ({type: TOGGLE_IS_SAVING, isSaving});
-
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE,  profile: profile});
 const setStatus = (status) => ({type: SET_STATUS,  status: status});
 const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
 const setError = (err) => ({type: SET_ERROR , errorMessage: err});
 
 
-//thunkCreator из него возращаем непосредственно нашу thunk
+// thunk - это ф-ия, которая выполняет какую-то асинхронную операцию и умеет диспатчить экшены,в парметрах принимает ф-ию dispatch
+// и саму ф-ию thunk можно задиспатчить и store ее запустит, а не отправит по редьюсерам.
+// thunkCreator - мы диспатчим вызов этой ф-ии (store ее вызывает), 
+// что бы иметь возможность диспатчить другие эшены внутри thunk из замыкания.
+// из ф-ии thunkCreator возращаем непосредственно нашу thunk
 export const getPersonalInfo = (userId) => {
   return async (dispatch) => {
     dispatch(toggleIsFetching(true));

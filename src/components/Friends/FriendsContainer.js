@@ -50,8 +50,17 @@ const mapStateToProps = (state) => {
   }
 };
 
-//теперь передаем вместо функции mapDispatchToProps передаем объект,
-//ф-ия connect сама возьмет этот объект и сгененирурет коллбэки которые мы реньше прописывали в mapDispatchToProps
+
+// compose - ф-ия принимающая несколько параметров через , эти параметры являются функциями,
+// и возвращаемое значение первой ф-ии станет, аргументом второй и т.д. слева на право;
+
+// ф-ия connect - дает возможность компоненте взять данные из store,
+// connect(mstp, mdtp)(component) - это HOC, она вызывает subscribe - подписывается на изменение контекста,
+// когда state меняется, она будет вызывать ф-ию mstp, если новый объект из mstp не равен предыдущему store,
+// то произойдет render component.
+// теперь, вместо функции mapDispatchToProps передаем объект,
+// connect сама возьмет этот объект и сгененирурет коллбэки которые мы реньше прописывали в mapDispatchToProps;
+
 export default compose(
   connect(mapStateToProps, {
     setCurrentFriendsPage,

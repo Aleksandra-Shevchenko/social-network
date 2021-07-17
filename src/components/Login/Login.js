@@ -1,17 +1,22 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginFormSchema } from "../../utils/validation/validationFormSchema";
-import {login} from '../../redux/authReducer';
+import {login, setError} from '../../redux/authReducer';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
 import style from './Login.module.css';
+import React from 'react';
 
 
-function Login({ login, error, captchaUrl }) {
+function Login({ login, error, captchaUrl, setError }) {
+
+  React.useEffect(() => {
+    setError('');
+  }, [])
 
   const handleSubmit = (values, { resetForm, setSubmitting }) => {
     login(values)
       .then((res) => {
-        if(res) resetForm();
+        if (res) resetForm();
         setSubmitting(false);
       })
       .catch(() => {
@@ -124,4 +129,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {login})(withRouter(Login));
+export default connect(mapStateToProps, {login, setError})(withRouter(Login));

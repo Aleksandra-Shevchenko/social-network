@@ -17,7 +17,7 @@ let inintialState = {
 };
 
 const setAuthUserData = (data) => ({type: SET_AUTH_USER_DATA , data: data});
-const setError = (err) => ({type: SET_ERROR , errorMessage: err});
+ export const setError = (err) => ({type: SET_ERROR , errorMessage: err});
 const setCaptchaUrl = (url) => ({type: GET_CAPTCHA_URL , captchaUrl: url});
 
 const authReducer = (state = inintialState, action) => {

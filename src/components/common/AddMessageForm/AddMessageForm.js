@@ -3,8 +3,10 @@ import style from './AddMessageForm.module.css';
 
 
 function AddMessageForm({error, onSubmit}) {
-  const submit = (values, { setSubmitting }) => {
+  const submit = (values, actions) => {
     onSubmit(values);
+    actions.setFieldValue("message", "");
+    actions.setSubmitting(false);
   }
   
   return (
@@ -22,9 +24,8 @@ function AddMessageForm({error, onSubmit}) {
           />
           <ErrorMessage name="message" component="span" className={style.error} />
           <button type="submit"
-            // disabled={isSubmitting}
             className={`${style.btn} ${!(dirty && isValid) ? style.btn_disabled : ""}`}
-            disabled={!(dirty && isValid)}
+            disabled={!(dirty && isValid) && isSubmitting}
           >
               Publish
           </button>
